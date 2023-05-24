@@ -389,7 +389,9 @@ public final class Diseño extends javax.swing.JFrame {
             errores.add("- Hay campos vacios");
             
         }
-
+        if (!Nombre.getText().matches("^[a-zA-Z\\s][a-zA-Z0-9\\s]*$")){
+            errores.add("- Ingrese un nombre valido (no puede empezar por numeros ni contener caracteres especiales)");
+        }
         try {
             double precioCompra = Double.parseDouble(precio_compra.getText());
             double precioVenta = Double.parseDouble(precio_venta.getText());
