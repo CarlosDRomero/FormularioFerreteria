@@ -16,7 +16,7 @@ public class CategoriaDAO {
         con = conector.getConexion();
     }
     
-    public ArrayList<Categoria> cargarProveedores() throws SQLException{
+    public ArrayList<Categoria> cargarCategorias() throws SQLException{
         String sql = "SELECT ID_CATEGORIA, DENOMINACION FROM CATEGORIA";
         Statement s = con.createStatement();
         ResultSet rs = s.executeQuery(sql);

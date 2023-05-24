@@ -39,6 +39,7 @@ public class ProductoDAO {
     
     
     
+    
     public ArrayList<String[]> obtenerDatosTabla(ArrayList<Producto> listaProductos){
         String[] datos= new String[6];
         ArrayList<String[]> filasColumna = new ArrayList<>();
