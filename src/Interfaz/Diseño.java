@@ -69,9 +69,9 @@ public final class Diseño extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tabla = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        seg_nombre = new javax.swing.JTextField();
+        precio_venta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         iva = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -167,7 +167,7 @@ public final class Diseño extends javax.swing.JFrame {
         jPanelAparicion.add(jLabel6);
         jLabel6.setBounds(480, 160, 51, 16);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -193,12 +193,12 @@ public final class Diseño extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        Tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                TablaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Tabla);
 
         jPanelAparicion.add(jScrollPane1);
         jScrollPane1.setBounds(30, 240, 720, 350);
@@ -207,13 +207,13 @@ public final class Diseño extends javax.swing.JFrame {
         jPanelAparicion.add(jLabel7);
         jLabel7.setBounds(470, 90, 48, 16);
 
-        seg_nombre.addActionListener(new java.awt.event.ActionListener() {
+        precio_venta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                seg_nombreActionPerformed(evt);
+                precio_ventaActionPerformed(evt);
             }
         });
-        jPanelAparicion.add(seg_nombre);
-        seg_nombre.setBounds(180, 180, 90, 22);
+        jPanelAparicion.add(precio_venta);
+        precio_venta.setBounds(180, 180, 90, 22);
 
         jLabel5.setText("        precio_venta");
         jPanelAparicion.add(jLabel5);
@@ -256,30 +256,33 @@ public final class Diseño extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirActionPerformed
 
     private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
-//        String nombre1= Nombre.getText();
-//        String nombre2= seg_nombre.getText();
-//        String apellido1= precio_compra.getText();
-//        String apellido2= iva.getText();
-//        // Suponiendo que tienes un JComboBox llamado comboBox
-//        
-//        int idMatricula=Integer.parseInt(Num_matricula.getText());
-//        if (CamposVacios()) {
-//            JOptionPane.showMessageDialog(null, "Hay algun campo queno deberia estar vacio");
-//        }
-//        Estudiante e =new Estudiante(nombre1, nombre2, apellido1, apellido2, fechaNacimiento, idMatricula);
-//         try {
-//             if(c.InsertarEstudiante(e)){
-//              limpiar();
-//             ActualizarDatos();}
-//         } catch (SQLException ex) {
-//             Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
-//         }
+
+        if (!validarCampos()) {
+            JOptionPane.showMessageDialog(null, "Hay algun campo queno deberia estar vacio");
+            return;
+        }
+        String nombre = Nombre.getText();
+        int precioCompra = Integer.parseInt(precio_compra.getText());
+        int precioVenta = Integer.parseInt(precio_venta.getText());
+        int IVA = Integer.parseInt(iva.getText());
+        Proveedor pr = proveedores.get(JCprovedores.getSelectedIndex());
+        String rutProveedor = pr.getRut();
+        int idCategoria = JCcategorias.getSelectedIndex() + 1;
+        Producto producto = new Producto(0, nombre, precioCompra, precioVenta, IVA, rutProveedor, idCategoria);
+         try {
+             if(pd.InsertarProducto(producto)){
+              limpiar();
+             ActualizarDatos();
+             }
+         } catch (SQLException ex) {
+             Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }//GEN-LAST:event_InsertarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-      int a=jTable1.getSelectedRow();
+      int a=Tabla.getSelectedRow();
          try {
-             pd.eliminarproducto(productos.get(a));
+             pd.eliminarProducto(productos.get(a));
              ActualizarDatos();
          } catch (SQLException ex) {
              Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
@@ -290,9 +293,9 @@ public final class Diseño extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_NombreActionPerformed
 
-    private void seg_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seg_nombreActionPerformed
+    private void precio_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precio_ventaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_seg_nombreActionPerformed
+    }//GEN-LAST:event_precio_ventaActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
           if (fm==-1) {
@@ -308,7 +311,7 @@ public final class Diseño extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ModificarActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
       
 //        fm= jTable1.getSelectedRow();
 //        
@@ -321,7 +324,7 @@ public final class Diseño extends javax.swing.JFrame {
 //         fecha_nacimiento.setText(e.getFechaNacimiento());
 //        Num_matricula.setText(String.valueOf(e.getIdMatricula()));
 //        }
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_TablaMouseClicked
 
     private void JCprovedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCprovedoresActionPerformed
         // TODO add your handling code here:
@@ -383,37 +386,32 @@ public final class Diseño extends javax.swing.JFrame {
     
     public void limpiar(){
     Nombre.setText("");
-    seg_nombre.setText("");
+    precio_venta.setText("");
     precio_compra.setText("");
     iva.setText("");
     }
 //  import javax.swing.JTextField;
 
 
-    public static boolean validarCampos(JTextField nombreField, JTextField precioCompraField,
-                                        JTextField precioVentaField, JTextField ivaField) {
-        // Validar campos vacíos
-        if (nombreField.getText().isEmpty() || precioCompraField.getText().isEmpty()
-                || precioVentaField.getText().isEmpty() || ivaField.getText().isEmpty()) {
-            return false;  // Hay campos vacíos
+    public boolean validarCampos() {
+        if (Nombre.getText().isEmpty() || precio_compra.getText().isEmpty()
+                || precio_venta.getText().isEmpty() || iva.getText().isEmpty()) {
+            return false;
         }
 
-        // Validar datos ingresados
         try {
-            double precioCompra = Double.parseDouble(precioCompraField.getText());
-            double precioVenta = Double.parseDouble(precioVentaField.getText());
-            double iva = Double.parseDouble(ivaField.getText());
-
-            // Aquí puedes agregar más validaciones específicas según tus requisitos
+            double precioCompra = Double.parseDouble(precio_compra.getText());
+            double precioVenta = Double.parseDouble(precio_venta.getText());
+            double IVA = Double.parseDouble(iva.getText());
             
-            if (precioCompra <= 0 || precioVenta <= 0 || iva < 0 || precioCompra >= precioVenta) {
-                return false;  // Los datos ingresados no son válidos
+            if (precioCompra <= 0 || precioVenta <= 0 || IVA < 0 || precioCompra >= precioVenta) {
+                return false; 
             }
         } catch (NumberFormatException e) {
-            return false;  // Error al convertir los datos a números
+            return false;
         }
 
-        return true;  // Los campos y datos son válidos
+        return true;
     }
 
 
@@ -425,7 +423,7 @@ public final class Diseño extends javax.swing.JFrame {
     model.addColumn("iva");
     model.addColumn("Proveedor");
     model.addColumn("Categoria");
-    jTable1.setModel(model);
+    Tabla.setModel(model);
          for (String[] fila : filas) {
              model.addRow(fila);
          }
@@ -447,6 +445,7 @@ public final class Diseño extends javax.swing.JFrame {
     private javax.swing.JButton Modificar;
     private javax.swing.JTextField Nombre;
     private javax.swing.JButton Salir;
+    public static javax.swing.JTable Tabla;
     private javax.swing.JTextField iva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -459,8 +458,7 @@ public final class Diseño extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelAparicion;
     private javax.swing.JPanel jPanelBase;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable1;
     private javax.swing.JTextField precio_compra;
-    private javax.swing.JTextField seg_nombre;
+    private javax.swing.JTextField precio_venta;
     // End of variables declaration//GEN-END:variables
 }
