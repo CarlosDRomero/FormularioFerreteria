@@ -33,13 +33,14 @@ public final class Diseño extends javax.swing.JFrame {
         prd= new ProveedorDAO();
        proveedores = prd.cargarProveedores();
        categorias = cd.cargarCategorias();
-       productos = pd.obtenerProductos();
+       
        for(Proveedor p: proveedores){
             JCprovedores.addItem(p.getNombre());
-        };
+        }
         for(Categoria p: categorias){
             JCcategorias.addItem(p.getDenominacion());
-        };
+        }
+        ActualizarDatos();
     }
 
     /**
