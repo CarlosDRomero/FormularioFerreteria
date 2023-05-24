@@ -1,0 +1,15 @@
+SELECT CONCAT(
+    COALESCE(c.prim_nombre, ''),
+    ' ',
+    COALESCE(c.seg_nombre, ''),
+    ' ',
+    COALESCE(c.prim_apellido, ''),
+    ' ',
+    COALESCE(c.seg_apellido, '')
+) AS nombre_cliente, e.marca
+FROM cliente c
+JOIN compra co ON c.id_cliente = co.id_cliente
+JOIN celular ce ON co.id_celular = ce.id_celular
+JOIN tienda t ON co.id_tienda = t.id_tienda
+JOIN especificaciones e ON ce.id_especificacion = e.id_especificacion
+WHERE t.id_tienda = 3;

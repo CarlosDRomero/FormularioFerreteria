@@ -1,0 +1,307 @@
+INSERT INTO empresa (nombre) VALUES ('Claro');     #1
+INSERT INTO empresa (nombre) VALUES ('Tigo');      #2
+INSERT INTO empresa (nombre) VALUES ('Movistar');  #3
+INSERT INTO empresa (nombre) VALUES ('etb');       #4
+INSERT INTO empresa (nombre) VALUES ('avantel');   #5
+
+
+INSERT INTO apps (app_consumo, nombre)VALUES ('ilimitado', 'whatsapp');  #1
+INSERT INTO apps (app_consumo, nombre)VALUES ('ilimitado', 'facebook');  #2
+INSERT INTO apps (app_consumo, nombre)VALUES ('ilimitado', 'twiter');  #3
+INSERT INTO apps (app_consumo, nombre)VALUES ('ilimitado', 'waze');  #4
+INSERT INTO apps (app_consumo, nombre)VALUES ('ilimitado', 'intagram');  #5
+INSERT INTO apps (app_consumo, nombre)VALUES ('ilimitado', 'maps');    #6
+
+INSERT INTO Tipo_sim (tipo)VALUES ('pospago');
+INSERT INTO Tipo_sim (tipo)VALUES ('prepago');
+
+INSERT INTO tienda (direccion, N_direccion)VALUES ('Calle 85', '#57-67');
+INSERT INTO tienda (direccion, N_direccion)VALUES ('avenida 17', '#62-12');
+INSERT INTO tienda (direccion, N_direccion)VALUES ('carrera 57', '#57-17');
+
+
+
+-- Insertar datos de ejemplo en la tabla cliente
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion) #1
+VALUES ('989654132', 'Juan', 'david', 'perez', 'bautista', 'Calle 57', '#68-13');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion) #2
+VALUES ('14268056', 'Maria', null, 'Garcia', 'lopez', 'Avenida 13', 'cll 12B-2');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion)  #3
+VALUES ('95765412', 'juan', 'pablo', 'Gomez', 'lopez', 'calle 123', '#37-25');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion)  #4
+VALUES ('102856892', 'Pedro', NULL, 'torres', null, 'Carrera 76', '# 38-16');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion)  #5
+VALUES ('456789123', 'johan', NULL, 'tacuma', 'culma', 'Carrera 76', '# 38-16');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion)  #6
+VALUES ('5651182', 'luis', 'victor', 'herrera', null, 'avenida 19', '# 58-12');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion) #7
+VALUES ('5651182', 'luisA', 'victoria', 'zapata', null, 'avenida 20', '# 59-11');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion) #8
+VALUES ('654321987', 'Michael', 'James', 'Williams', NULL, 'calle 100', '#123');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion) #9
+VALUES ('987654321', 'Jane', NULL, 'Johnson', 'Doe', '456 Elm Avenue', '#67-8');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion) #10
+VALUES ('987654', 'Javier', null, 'Garcia', null, 'Calle 57', '#68-13');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion) #11
+VALUES ('5651182', 'luisA', 'victoria', 'zapata', null, 'avenida 20', '#59-11');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion) #12
+VALUES ('1234567', 'Juan', null, 'Gomez', null, 'Calle 123', '#45-67');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion) #13
+VALUES ('9876543', 'Maria', null, 'Lopez', 'Gonzalez', 'Avenida 13', '#10-20');
+
+INSERT INTO cliente ( cedula, prim_nombre, seg_nombre, prim_apellido, seg_apellido, direccion, N_direccion) #14
+VALUES ('654321', 'Pedro', 'Pablo', 'Torres', null, 'Carrera 76', '#30-40');
+
+
+
+
+INSERT INTO especificaciones (marca, almacenamiento, ram, camara, velocidad)
+VALUES ('Xiaomi', '128GB', '6GB', '48MP', '2.3GHz');
+
+INSERT INTO especificaciones (marca, almacenamiento, ram, camara, velocidad)
+VALUES ('Samsung', '256GB', '8GB', '64MP', '2.8GHz');
+
+INSERT INTO especificaciones (marca, almacenamiento, ram, camara, velocidad)
+VALUES ('Apple', '64GB', '4GB', '12MP', '2.5GHz');
+
+INSERT INTO especificaciones (marca, almacenamiento, ram, camara, velocidad)
+VALUES ('Huawei', '256GB', '8GB', '48MP + 20MP', '2.7 GHz');
+
+INSERT INTO especificaciones (marca, almacenamiento, ram, camara, velocidad)
+VALUES ('realme', '512GB', '12GB', '62MP + 25MP', '3.3 GHz');
+
+INSERT INTO especificaciones (marca, almacenamiento, ram, camara, velocidad)
+VALUES ('Xiaomi note 12', '128GB', '6GB', '32MP', '2.5GHz');
+
+
+#POSPAGO
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, 'mensual', '70GB', 'ilimitados', '$75.900');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, 'mensual', '50GB', 'ilimitados', '$55.900');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, 'mensual', '35GB', '5.000', '$40.000');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, 'mensual', '20GB', 'ilimitados', '$35.000');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, 'mensual', '75GB', NULL, '$60.000');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, 'mensual', 'ilimitado', NULL, '$94.900');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, 'mensual', null, 'ilimitados', '$86.900');
+
+
+#PLAN FAMILIAR
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (4, 'mensual', '120GB', 'ilimitados', '$98.000');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (4, 'mensual', '200GB', 'ilimitados', '$120.000');
+
+#PREPAGO
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, 'mensual', 'ilimitado', NULL, '$86.000');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, '7 dias', '26GB', NULL, '$7.000');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, '20 dias', null, NULL, '$16.000');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, '15 dias', null, NULL, '$20.000');
+
+INSERT INTO detalles_plan (personas, duracion, datos, minutos, precio)
+VALUES (1, '20 dias', null, NULL, '$30.000');
+
+
+
+#relacion detalles_plan y apps
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (1, 1);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (1, 2);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (1, 3);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (1, 5);
+
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (2, 1);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (2, 2);
+
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (3, 1);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (3, 4);
+
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (4, 1);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (4, 4);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (4, 6);
+
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (7, 1);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (7, 2);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (7, 5);
+
+
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (8, 1);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (8, 2);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (8, 5);
+
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (9, 1);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (9, 2);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (9, 4);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (9, 5);
+
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (11, 1);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (11, 2);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (11, 3);
+
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (13, 5);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (13, 6);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (13, 1);
+
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (14, 4);
+INSERT INTO detalle_apps (id_detalle, id_apps)VALUES (14, 6);
+
+
+
+#id_plan
+INSERT INTO plan (servicio, id_detalle)VALUES ('Plan', 1);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Plan', 2);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Plan', 3);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Plan', 4);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Plan', 5);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Plan', 6);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Plan', 7);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Plan familiar', 8);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Plan familiar', 9);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Paquetes', 10);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Paquetes', 11);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Paquetes', 12);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Paquetes', 13);
+INSERT INTO plan (servicio, id_detalle)VALUES ('Paquetes', 14);
+
+
+
+
+#celular
+INSERT INTO celular ( precio, tipo_pago, id_especificacion)
+VALUES (500.000, 'Efectivo', 1);
+
+INSERT INTO celular ( precio, tipo_pago, id_especificacion)
+VALUES (750.000, 'Tarjeta de credito', 2);
+
+INSERT INTO celular ( precio, tipo_pago, id_especificacion)
+VALUES (1200.000, 'Transferencia bancaria', 3);
+
+INSERT INTO celular ( precio, tipo_pago, id_especificacion)
+VALUES (1000.000, 'Efectivo', 4);
+
+INSERT INTO celular ( precio, tipo_pago, id_especificacion)
+VALUES (900.000, 'Tarjeta de credito', 5);
+
+INSERT INTO celular ( precio, tipo_pago, id_especificacion)
+VALUES (800.000, 'Transferencia bancaria', 6);
+
+
+
+#id_sim
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa)#1
+VALUES (9876543210, 1, 1, 1);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #2
+VALUES (5551234567, 1, 2, 2);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa)#3
+VALUES (9998887777, 1, 3, 3);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #4
+VALUES (9998887777, 1, 4, 4);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #5
+VALUES (9998887777, 1, 5, 5);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #6
+VALUES (2468135790, 1, 6, 1);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #7
+VALUES (2456455790, 1, 7, 2);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #8
+VALUES (9542355790, 1, 8, 3);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #9
+VALUES (289965790, 1, 9, 1);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #10
+VALUES (456735790, 2, 10, 1);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #11
+VALUES (67657790, 2, 11, 2);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #12
+VALUES (34557790, 2, 12, 3);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #13
+VALUES (45667790, 2, 13, 4);
+
+INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #14
+VALUES (123267790, 2, 14, 5);
+
+
+
+
+#compra
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2015-01-01' , 1, 1, 1, 1);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2013-02-05' , 2, 2, 2, 1);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)  
+VALUES ('2014-03-05' , 3, 3, 3, 2);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2015-04-05' , 4, 4, 4, 2);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2016-07-08' , 5, 5, 5, 3);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2019-08-05' , 6, 6, 6, 3);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2011-09-04' , 1, 7, 7, 3);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2011-11-12' , 2, 8, 8, 1);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2016-10-21' , 3, 9, 9, 2);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2011-10-23' , 4, 10, 10, 3);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2016-10-23' , 5, 11, 11, 1);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2016-10-28' , 6, 12, 12, 2);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2011-10-15' , 3, 13, 13, 3);
+
+INSERT INTO compra (fecha_compra, id_celular, id_sim, id_cliente, id_tienda)
+VALUES ('2011-10-23' , 2, 14, 14, 1);

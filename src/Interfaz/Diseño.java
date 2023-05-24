@@ -290,6 +290,11 @@ public final class Diseño extends javax.swing.JFrame {
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
       int a=Tabla.getSelectedRow();
+      if(a==-1){
+          errores.add("seleccione una fila");
+      mostrarErrores();
+      return;
+      }
          try {
              pd.eliminarProducto(productos.get(a));
              ActualizarDatos();
@@ -322,11 +327,18 @@ public final class Diseño extends javax.swing.JFrame {
        p.setPrecio_compra(Integer.parseInt(precio_compra.getText()));
        p.setPrecio_venta(Integer.parseInt(precio_venta.getText()));
        p.setIVA(Integer.parseInt(iva.getText()));
-       int indice_prov= proveedores.stream() .map(Proveedor::getRut) .collect(java.util.stream.Collectors.toList()) .indexOf(p.getRutProveedor());;
-       Proveedor pr = proveedores.get(indice_prov) ;
+       Proveedor pr = proveedores.get(JCprovedores.getSelectedIndex()) ;
        p.setRutProveedor(pr.getRut());
        p.setId_categoria(JCcategorias.getSelectedIndex()+1);
        
+        try {
+            if(pd.modificarProducto(p)){
+                limpiar();
+                ActualizarDatos();
+                fm=-1;
+            }
+        } catch (SQLException e) {
+        }
        
     }//GEN-LAST:event_ModificarActionPerformed
 
