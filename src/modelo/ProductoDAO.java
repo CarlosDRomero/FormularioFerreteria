@@ -36,7 +36,35 @@ public class ProductoDAO {
         }
         return listaProductos;
     }
-    
+    public boolean InsertarProducto(Producto p) throws SQLException {
+        
+        PreparedStatement ps =   con.prepareStatement("INSERT INTO PRODUCTO (NOMBRE, PRECIO_COMPRA, PRECIO_VENTA, IVA, RUT_PROVEEDOR, ID_CATEGORIA) VALUES (?,?,?,?,?,?)");
+        ps.setString(1, p.getNombre());
+        ps.setInt(2, p.getPrecio_compra());
+        ps.setInt(3, p.getPrecio_venta());
+        ps.setInt(4, p.getIVA());
+        ps.setString(5, p.getRutProveedor());
+        ps.setInt(6, p.getId_categoria());
+        System.out.println(ps.toString());
+       int filasAfectadas = ps.executeUpdate();
+    return filasAfectadas > 0;
+
+    }
+    public boolean modificarProducto(Producto p) throws SQLException{
+        PreparedStatement ps =   con.prepareStatement("UPDATE producto SET NOMBRE=?,PRECIO_COMPRA=?,PRECIO_VENTA=?,IVA=?, RUT_PROVEEDOR=?, ID_CATEGORIA=? WHERE ID_PRODUCTO=?");
+        ps.setString(1, p.getNombre());
+        ps.setInt(2, p.getPrecio_compra());
+        ps.setInt(3, p.getPrecio_venta());
+        ps.setInt(4, p.getIVA());
+        ps.setString(5, p.getRutProveedor());
+        ps.setInt(6, p.getId_categoria());
+        ps.setInt(7, p.getId());
+        System.out.println(ps.toString());
+       int filasAfectadas = ps.executeUpdate();
+    return filasAfectadas > 0;
+
+        
+    }
     public boolean eliminarproducto(Producto p) throws SQLException {
         
         PreparedStatement ps =   con.prepareStatement("""
@@ -68,6 +96,8 @@ public class ProductoDAO {
             int iva = rs.getInt(4);
             String prov = rs.getString(5);
             String categ = rs.getString(6);
+            
+            System.out.println(nombre+", "+pc+", "+pv+", "+iva+", "+prov+", "+categ);
             
             datos[0] = nombre;
             datos[1] = String.valueOf(pc);

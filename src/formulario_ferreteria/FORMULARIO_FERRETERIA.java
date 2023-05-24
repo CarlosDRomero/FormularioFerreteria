@@ -17,13 +17,7 @@ public class FORMULARIO_FERRETERIA {
         ProductoDAO pd = new ProductoDAO();
        ArrayList<Producto> p = pd.obtenerProductos();
        
-       for (Producto pr : p){
-           System.out.print(pr.getId()+" ");
-           System.out.print(pr.getNombre()+" ");
-           System.out.print(pr.getPrecio_compra()+" ");
-           System.out.print(pr.getPrecio_venta()+" ");
-           System.out.print(pr.getRutProveedor()+"\n");
-       }
+       pd.obtenerDatosTabla();
     }
     
 }
