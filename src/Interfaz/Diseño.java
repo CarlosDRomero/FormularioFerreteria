@@ -298,32 +298,25 @@ public final class Diseño extends javax.swing.JFrame {
     }//GEN-LAST:event_precio_ventaActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-          if (fm==-1) {
+        
+      if (fm==-1) {
            return; 
         }
-        
-        int indiceSeleccionado = jTable1.getSelectedRow();
-        TableModel modeloTabla = jTable1.getModel();
-        productos.get(indiceSeleccionado);
-    Nombre.setText(valor1.toString());
-    precio_compra.setText((String) ( valor2));
-    
-        
+       
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
       
-//        fm= jTable1.getSelectedRow();
-//        
-//        Estudiante e = lista_estudiantes.get(fm);
-//        if(e != null){
-//         Nombre.setText(e.getNombre1());
-//         seg_nombre.setText(e.getNombre2());
-//        precio_compra.setText(e.getApellido1());
-//         iva.setText(e.getApellido2());
-//         fecha_nacimiento.setText(e.getFechaNacimiento());
-//        Num_matricula.setText(String.valueOf(e.getIdMatricula()));
-//        }
+        fm= Tabla.getSelectedRow();
+        
+    Producto p = productos.get(fm);
+    Nombre.setText(p.getNombre());
+    precio_compra.setText(String.valueOf(p.getPrecio_compra()));
+    precio_venta.setText(String.valueOf(p.getPrecio_venta()));
+    iva.setText(String.valueOf(p.getIVA())); 
+    int indice_prov= proveedores.stream() .map(Proveedor::getRut) .collect(java.util.stream.Collectors.toList()) .indexOf(p.getRutProveedor());;
+    JCcategorias.setSelectedIndex(p.getId_categoria()-1);
+    JCprovedores.setSelectedIndex(indice_prov);
     }//GEN-LAST:event_TablaMouseClicked
 
     private void JCprovedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCprovedoresActionPerformed
