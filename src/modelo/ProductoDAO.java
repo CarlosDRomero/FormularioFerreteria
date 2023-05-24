@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class ProductoDAO {
     Connection con;
-    PreparedStatement ps;
+    
     public ProductoDAO(){
         con = conector.getConexion();
     }
@@ -37,7 +37,22 @@ public class ProductoDAO {
         return listaProductos;
     }
     
-    
+    public boolean eliminarproducto(Producto p) throws SQLException {
+        
+        PreparedStatement ps =   con.prepareStatement("""
+                                                      DELETE FROM INVENTARIO_FERRETERIA WHERE ID_PRODUCTO = ?;
+                                                      DELETE FROM PRODUCTOS_SOLICITUD WHERE ID_PRODUCTO = ?;
+                                                      DELETE FROM ITEMS_FACTURA WHERE ID_PRODUCTO = ?;
+                                                      DELETE FROM PRODUCTO WHERE ID_PRODUCTO = ?;
+                                                      """);
+        ps.setInt(1,p.getId());
+        ps.setInt(2, p.getId());
+        ps.setInt(3, p.getId());
+        ps.setInt(4, p.getId());
+        System.out.println(ps.toString());
+        int filasAfectadas = ps.executeUpdate();
+        return filasAfectadas > 0;
+    }
     
     
     public ArrayList<String[]> obtenerDatosTabla(){
