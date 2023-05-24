@@ -26,7 +26,16 @@ public final class Diseño extends javax.swing.JFrame {
     ProductoDAO pd;
     CategoriaDAO cd;
     ProveedorDAO prd;
-    
+    ArrayList<String> errores;
+    private void mostrarErrores(){
+        String s_errores = "";
+        for (String error : errores){
+            s_errores+=error+"\n";
+        }
+        
+        JOptionPane.showMessageDialog(null, s_errores);
+        errores.clear();
+    }
     
     public Diseño() throws SQLException {
         initComponents();
@@ -258,7 +267,7 @@ public final class Diseño extends javax.swing.JFrame {
     private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
 
         if (!validarCampos()) {
-            JOptionPane.showMessageDialog(null, "Hay algun campo queno deberia estar vacio");
+            mostrarErrores();
             return;
         }
         String nombre = Nombre.getText();
@@ -406,7 +415,9 @@ public final class Diseño extends javax.swing.JFrame {
     public boolean validarCampos() {
         if (Nombre.getText().isEmpty() || precio_compra.getText().isEmpty()
                 || precio_venta.getText().isEmpty() || iva.getText().isEmpty()) {
-            return false;
+            
+            errores.add("- Hay campos vacios");
+            
         }
 
         try {
@@ -414,14 +425,19 @@ public final class Diseño extends javax.swing.JFrame {
             double precioVenta = Double.parseDouble(precio_venta.getText());
             double IVA = Double.parseDouble(iva.getText());
             
-            if (precioCompra <= 0 || precioVenta <= 0 || IVA < 0 || precioCompra >= precioVenta) {
-                return false; 
+            if (precioCompra <= 0 || precioVenta <= 0 || IVA < 0) {
+                errores.add("- No coloque numeros negativos");
+                
+            }
+            if (precioCompra >= precioVenta){
+                errores.add("- El precio de venta debe ser mayor que el precio de compra");
             }
         } catch (NumberFormatException e) {
-            return false;
+            
+            errores.add("- Inserte valores numericos validos");
         }
 
-        return true;
+        return errores.isEmpty();
     }
 
 
