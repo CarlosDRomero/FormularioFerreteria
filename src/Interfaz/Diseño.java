@@ -4,6 +4,7 @@ package Interfaz;
 
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -318,24 +319,28 @@ public final class Diseño extends javax.swing.JFrame {
               limpiar();
              ActualizarDatos();
              }
-         } catch (SQLException ex) {
+         } catch (SQLIntegrityConstraintViolationException ex) {
+             errores.add("Esta id ya esta registrada,\npuede utilizar el boton modificar si desea actualizar el registro." );
+             mostrarErrores();
+         }catch(SQLException ex){
              Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
          }
     }//GEN-LAST:event_InsertarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-      int a=Tabla.getSelectedRow();
-      if(a==-1){
-          errores.add("Seleccione una fila para eliminar");
-      mostrarErrores();
-      return;
-      }
-         try {
-             pd.eliminarProducto(productos.get(a));
-             ActualizarDatos();
-         } catch (SQLException ex) {
-             Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
-         }
+
+        if(fm==-1){
+            errores.add("Seleccione una fila para eliminar");
+        mostrarErrores();
+        return;
+        }
+        try {
+            pd.eliminarProducto(productos.get(fm));
+            ActualizarDatos();
+            fm = -1;
+        } catch (SQLException ex) {
+            Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreActionPerformed
@@ -347,21 +352,26 @@ public final class Diseño extends javax.swing.JFrame {
     }//GEN-LAST:event_PrecioVentaActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        if(!validarCampos()){
+            
+            if(fm==-1){
+                errores.clear();
+                errores.add("Seleccione una fila para modificar");
+            }
+            mostrarErrores();
+            return;
+         }
+      
 
-      if(!validarCampos()){
-          mostrarErrores();
-          return;
-       }
-      
-      
-       Producto p = productos.get(fm);
-       p.setNombre(Nombre.getText());
-       p.setPrecio_compra(Integer.parseInt(PrecioCompra.getText()));
-       p.setPrecio_venta(Integer.parseInt(PrecioVenta.getText()));
-       p.setIVA(Integer.parseInt(IVA.getText()));
-       Proveedor pr = proveedores.get(JCprovedores.getSelectedIndex()) ;
-       p.setRutProveedor(pr.getRut());
-       p.setId_categoria(JCcategorias.getSelectedIndex()+1);
+        Producto p = productos.get(fm);
+        p.setNombre(Nombre.getText());
+        p.setPrecio_compra(Integer.parseInt(PrecioCompra.getText()));
+        p.setPrecio_venta(Integer.parseInt(PrecioVenta.getText()));
+        p.setIVA(Integer.parseInt(IVA.getText()));
+        p.setCantidad(Integer.parseInt(Cantidad.getText()));
+        Proveedor pr = proveedores.get(JCprovedores.getSelectedIndex()) ;
+        p.setRutProveedor(pr.getRut());
+        p.setId_categoria(JCcategorias.getSelectedIndex()+1);
        
         try {
             if(pd.modificarProducto(p)){
@@ -427,25 +437,42 @@ public final class Diseño extends javax.swing.JFrame {
 
 
     public boolean validarCampos() {
-    validarCampoNoVacio(Nombre, "- El campo 'Nombre' no puede estar vacío");
-    validarCampoTextoValido(Nombre, "- Ingrese un nombre válido (no puede empezar por números ni contener caracteres especiales)");
-    validarCampoNumerico(IVA, "- Introduzca un valor numérico para el IVA");
-    validarCampoNumerico(PrecioCompra, "- Introduzca un valor numérico para el precio de compra");
-    validarCampoNumerico(PrecioVenta, "- Introduzca un valor numérico para el precio de venta");
-    validarCampoNumerico(Cantidad, "- Introduzca un valor numérico para la cantidad");
-    validarID(Id, "- La ID debe contener exactamente 12 dígitos numéricos");
-    int iva = obtenerEnteroDesdeCampo(IVA);
-    int precioCompra = obtenerEnteroDesdeCampo(PrecioCompra);
-    int precioVenta = obtenerEnteroDesdeCampo(PrecioVenta);
-    int cantidad = obtenerEnteroDesdeCampo(Cantidad);
+        int iva, precioCompra, precioVenta, cantidad;
 
-    if (iva < 0 || precioCompra <= 0 || precioVenta <= 0 || cantidad<0) {
-        errores.add("- No coloque números negativos");
-    } else if (precioCompra >= precioVenta) {
-        errores.add("- El precio de venta debe ser mayor que el precio de compra");
-    }
+        validarCampoNoVacio(Nombre, "- El campo 'Nombre' no puede estar vacío");
+        validarCampoTextoValido(Nombre, "- Ingrese un nombre válido (no puede empezar por números ni contener caracteres especiales)");
 
-    return errores.isEmpty();
+        validarID(Id, "- La ID debe contener exactamente 12 dígitos numéricos");
+        boolean vIVA = validarCampoNumerico(IVA, "- Introduzca un valor numérico para el IVA");
+        boolean vPC = validarCampoNumerico(PrecioCompra, "- Introduzca un valor numérico para el precio de compra");
+        boolean vPV = validarCampoNumerico(PrecioVenta, "- Introduzca un valor numérico para el precio de venta");
+        boolean vCantidad = validarCampoNumerico(Cantidad, "- Introduzca un valor numérico para la cantidad");
+
+        boolean errorNegativos = false;
+
+        if (vPC && vPV) {
+            precioCompra = obtenerEnteroDesdeCampo(PrecioCompra);
+            precioVenta = obtenerEnteroDesdeCampo(PrecioVenta);
+
+            if (precioCompra <= 0 || precioVenta <= 0) {
+                errores.add("- No coloque números negativos");
+                errorNegativos = true;
+            } else if (precioCompra >= precioVenta) {
+                errores.add("- El precio de venta debe ser mayor que el precio de compra");
+            }
+        }
+
+        if (vIVA && vCantidad) {
+            iva = obtenerEnteroDesdeCampo(IVA);
+            cantidad = obtenerEnteroDesdeCampo(Cantidad);
+
+            if (iva < 0 || cantidad < 0 && ! errorNegativos) {
+                errores.add("- No coloque números negativos");
+            }
+        }
+
+        return errores.isEmpty();
+
 }
 
     private void validarID(JTextField campo, String mensajeError) {
@@ -468,12 +495,14 @@ public final class Diseño extends javax.swing.JFrame {
         }
     }
 
-    private void validarCampoNumerico(JTextField campo, String mensajeError) {
+    private boolean validarCampoNumerico(JTextField campo, String mensajeError) {
         String valor = campo.getText();
         try {
             Integer.parseInt(valor);
+            return true;
         } catch (NumberFormatException e) {
             errores.add(mensajeError);
+            return false;
         }
     }
 

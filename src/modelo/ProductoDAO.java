@@ -46,7 +46,7 @@ public class ProductoDAO {
     public boolean InsertarProducto(Producto p) throws SQLException {
         
         PreparedStatement ps1 =   con.prepareStatement("INSERT INTO PRODUCTO (ID_PRODUCTO,NOMBRE, PRECIO_COMPRA, PRECIO_VENTA, IVA, RUT_PROVEEDOR, ID_CATEGORIA) VALUES (?,?,?,?,?,?,?)");
-        PreparedStatement ps2 =   con.prepareStatement("INSERT INTO INVENTARIO_FERRETERIA (ID_PRODUCTO, ID_FERRETERIA, CANTIDAD) VALUES (?,?,?)");
+        PreparedStatement ps2 =   con.prepareStatement("INSERT INTO INVENTARIO_FERRETERIA (ID_PRODUCTO, ID_FERRETERIA, CANTIDAD) VALUES (?,1,?)");
         
         ps1.setString(1,p.getId());
         ps1.setString(2, p.getNombre());
@@ -57,8 +57,7 @@ public class ProductoDAO {
         ps1.setInt(7, p.getId_categoria());
         
         ps2.setString(1, p.getId());
-        ps2.setInt(2, 3);
-        ps2.setInt(3, p.getCantidad());
+        ps2.setInt(2, p.getCantidad());
         
         System.out.println(ps1.toString());
         int filasAfectadas = 0;
@@ -70,7 +69,8 @@ public class ProductoDAO {
     }
     public boolean modificarProducto(Producto p) throws SQLException{
         PreparedStatement ps1 =   con.prepareStatement("UPDATE producto SET NOMBRE=?,PRECIO_COMPRA=?,PRECIO_VENTA=?,IVA=?, RUT_PROVEEDOR=?, ID_CATEGORIA=? WHERE ID_PRODUCTO=?");
-        PreparedStatement ps2 =   con.prepareStatement("UPDATE inventario_ferreteria SET CANTIDAD=? WHERE ID_FERRETERIA = 1");
+        PreparedStatement ps2 =   con.prepareStatement("UPDATE inventario_ferreteria SET CANTIDAD=? WHERE ID_PRODUCTO = ? AND ID_FERRETERIA = 1");
+        PreparedStatement ps3 =   con.prepareStatement("INSERT IGNORE INTO INVENTARIO_FERRETERIA (ID_PRODUCTO, ID_FERRETERIA, CANTIDAD) VALUES (?,1,?)");
         
         ps1.setString(1, p.getNombre());
         ps1.setInt(2, p.getPrecio_compra());
@@ -81,10 +81,18 @@ public class ProductoDAO {
         ps1.setString(7, p.getId());
         
         ps2.setInt(1, p.getCantidad());
+        ps2.setString(2, p.getId());
+        
+        ps3.setString(1, p.getId());
+        ps3.setInt(2, p.getCantidad());
         
         System.out.println(ps1.toString());
+        System.out.println(ps2.toString());
+        System.out.println(ps3.toString());
         int filasAfectadas = 0;
         filasAfectadas += ps1.executeUpdate();
+        filasAfectadas += ps2.executeUpdate();
+        filasAfectadas += ps3.executeUpdate();
         return filasAfectadas > 0;
 
         
@@ -137,7 +145,6 @@ public class ProductoDAO {
             String rut = rs.getString(8);
             String categ = rs.getString(9);
             
-            System.out.println(nombre+", "+pc+", "+pv+", "+iva+", "+prov+", "+rut+", "+categ);
             
             datos[0] = ID;
             datos[1] = nombre;
