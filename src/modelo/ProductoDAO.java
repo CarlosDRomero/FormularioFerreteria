@@ -40,12 +40,12 @@ public class ProductoDAO {
     
     
     
-    public ArrayList<String[]> obtenerDatosTabla(ArrayList<Producto> listaProductos){
+    public ArrayList<String[]> obtenerDatosTabla(){
         String[] datos= new String[6];
         ArrayList<String[]> filasColumna = new ArrayList<>();
         try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT p.NOMBRE, p.PRECIO_COMPRA, p.PRECIO_VENTA, p.IVA, pr.NOMBRE, c.DENOMINACION FROM producto as p INNER JOIN proveedor as pr ON pr.RUT_PROVEEDOR = p.RUT_PRODUCTO INNER JOIN categoria as c ON c.ID_CATEGORIA=p.ID_CATEGORIA ORDER BY p.ID_PRODUCTO;");
+        ResultSet rs = stmt.executeQuery("SELECT p.NOMBRE, p.PRECIO_COMPRA, p.PRECIO_VENTA, p.IVA, pr.NOMBRE, c.DENOMINACION FROM producto as p INNER JOIN proveedor as pr ON pr.RUT_PROVEEDOR = p.RUT_PROVEEDOR INNER JOIN categoria as c ON c.ID_CATEGORIA=p.ID_CATEGORIA ORDER BY p.ID_PRODUCTO;");
         while (rs.next()) {
             String nombre = rs.getString(1);
             int pc = rs.getInt(2);
