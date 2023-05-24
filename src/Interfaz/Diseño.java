@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.*;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.table.TableModel;
 /**
  *
  * @author LUIS
@@ -294,23 +295,17 @@ public final class Diseño extends javax.swing.JFrame {
     }//GEN-LAST:event_seg_nombreActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-//          if (fm==-1) {
-//           return; 
-//        }
-//        
-//        pd.eliminarproducto(productos.get());
-//        if (CamposVacios()) {
-//            JOptionPane.showMessageDialog(null, "Hay algun campo queno deberia estar vacio");
-//        }
-//        try {
-//             if(c. modificarEstudiante(e)){
-//              limpiar();
-//             ActualizarDatos();
-//             fm=-1;
-//             }
-//         } catch (SQLException ex) {
-//             Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
-//         }
+          if (fm==-1) {
+           return; 
+        }
+        
+        int indiceSeleccionado = jTable1.getSelectedRow();
+        TableModel modeloTabla = jTable1.getModel();
+        productos.get(indiceSeleccionado);
+    Nombre.setText(valor1.toString());
+    precio_compra.setText((String) ( valor2));
+    
+        
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
