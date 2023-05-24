@@ -298,10 +298,26 @@ public final class Diseño extends javax.swing.JFrame {
     }//GEN-LAST:event_precio_ventaActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-        
+
       if (fm==-1) {
            return; 
         }
+      if(!validarCampos()){
+          MostarErrores();
+       return;
+       }
+      
+      
+       Producto p = productos.get(fm);
+       p.setNombre(Nombre.getText());
+       p.setPrecio_compra(Integer.parseInt(precio_compra.getText()));
+       p.setPrecio_venta(Integer.parseInt(precio_venta.getText()));
+       p.setIVA(Integer.parseInt(iva.getText()));
+       int indice_prov= proveedores.stream() .map(Proveedor::getRut) .collect(java.util.stream.Collectors.toList()) .indexOf(p.getRutProveedor());;
+       Proveedor pr = proveedores.get(indice_prov) ;
+       p.setRutProveedor(pr.getRut());
+       p.setId_categoria(JCcategorias.getSelectedIndex()+1);
+       
        
     }//GEN-LAST:event_ModificarActionPerformed
 
@@ -317,6 +333,7 @@ public final class Diseño extends javax.swing.JFrame {
     int indice_prov= proveedores.stream() .map(Proveedor::getRut) .collect(java.util.stream.Collectors.toList()) .indexOf(p.getRutProveedor());;
     JCcategorias.setSelectedIndex(p.getId_categoria()-1);
     JCprovedores.setSelectedIndex(indice_prov);
+    
     }//GEN-LAST:event_TablaMouseClicked
 
     private void JCprovedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCprovedoresActionPerformed
@@ -415,6 +432,7 @@ public final class Diseño extends javax.swing.JFrame {
     model.addColumn("Precio Venta");
     model.addColumn("iva");
     model.addColumn("Proveedor");
+    model.addColumn("rut");
     model.addColumn("Categoria");
     Tabla.setModel(model);
          for (String[] fila : filas) {
