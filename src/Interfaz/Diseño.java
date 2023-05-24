@@ -312,8 +312,8 @@ public final class Diseño extends javax.swing.JFrame {
            return; 
         }
       if(!validarCampos()){
-          MostarErrores();
-       return;
+          mostrarErrores();
+          return;
        }
       
       
