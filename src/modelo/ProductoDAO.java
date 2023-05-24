@@ -65,20 +65,25 @@ public class ProductoDAO {
 
         
     }
-    public boolean eliminarproducto(Producto p) throws SQLException {
+    public boolean eliminarProducto(Producto p) throws SQLException {
         
-        PreparedStatement ps =   con.prepareStatement("""
-                                                      DELETE FROM INVENTARIO_FERRETERIA WHERE ID_PRODUCTO = ?;
-                                                      DELETE FROM PRODUCTOS_SOLICITUD WHERE ID_PRODUCTO = ?;
-                                                      DELETE FROM ITEMS_FACTURA WHERE ID_PRODUCTO = ?;
-                                                      DELETE FROM PRODUCTO WHERE ID_PRODUCTO = ?;
-                                                      """);
-        ps.setInt(1,p.getId());
-        ps.setInt(2, p.getId());
-        ps.setInt(3, p.getId());
-        ps.setInt(4, p.getId());
-        System.out.println(ps.toString());
-        int filasAfectadas = ps.executeUpdate();
+        PreparedStatement ps1 = con.prepareStatement("DELETE FROM INVENTARIO_FERRETERIA WHERE ID_PRODUCTO = ?");
+        PreparedStatement ps2 = con.prepareStatement("DELETE FROM PRODUCTOS_SOLICITUD WHERE ID_PRODUCTO = ?");
+        PreparedStatement ps3 = con.prepareStatement("DELETE FROM ITEMS_FACTURA WHERE ID_PRODUCTO = ?");
+        PreparedStatement ps4 = con.prepareStatement("DELETE FROM PRODUCTO WHERE ID_PRODUCTO = ?");
+        ps1.setInt(1, p.getId());
+        ps2.setInt(1, p.getId());
+        ps3.setInt(1, p.getId());
+        ps4.setInt(1, p.getId());
+        int filasAfectadas =0;
+        filasAfectadas += ps1.executeUpdate();
+        filasAfectadas += ps2.executeUpdate();
+        filasAfectadas += ps3.executeUpdate();
+        filasAfectadas += ps4.executeUpdate();
+        ps1.close();
+        ps2.close();
+        ps3.close();
+        ps4.close();
         return filasAfectadas > 0;
     }
     
