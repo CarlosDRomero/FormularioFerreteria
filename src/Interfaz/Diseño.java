@@ -2,33 +2,44 @@
 package Interfaz;
 
 
-import com.sun.jdi.connect.spi.Connection;
-
-import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import modelo.conector;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelo.*;
+import javax.swing.JComboBox;
 /**
  *
  * @author LUIS
  */
 public final class Diseño extends javax.swing.JFrame {
     private int fm=-1;
-  
+    ArrayList<Proveedor> proveedores;
+    ArrayList<Categoria> categorias;
+    ArrayList<Producto> productos;
+    ProductoDAO pd;
+    CategoriaDAO cd;
+    ProveedorDAO prd;
+    
+    
     public Diseño() throws SQLException {
         initComponents();
-
+        pd = new ProductoDAO();
+        cd = new CategoriaDAO();
+        prd= new ProveedorDAO();
+       proveedores = prd.cargarProveedores();
+       categorias = cd.cargarCategorias();
+       productos = pd.obtenerProductos();
+       for(Proveedor p: proveedores){
+            JCprovedores.addItem(p.getNombre());
+        };
+        for(Categoria p: categorias){
+            JCcategorias.addItem(p.getDenominacion());
+        };
     }
 
     /**
@@ -42,27 +53,27 @@ public final class Diseño extends javax.swing.JFrame {
 
         jPanelBase = new javax.swing.JPanel();
         JPanelMenu = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Insertar = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
+        Modificar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        Salir = new javax.swing.JButton();
         jPanelAparicion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        prim_nombre = new javax.swing.JTextField();
-        primer_apellido = new javax.swing.JTextField();
-        Num_matricula = new javax.swing.JTextField();
+        Nombre = new javax.swing.JTextField();
+        precio_compra = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        fecha_nacimiento = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         seg_nombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        seg_apellido = new javax.swing.JTextField();
+        iva = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        JCprovedores = new javax.swing.JComboBox<>();
+        JCcategorias = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -74,59 +85,51 @@ public final class Diseño extends javax.swing.JFrame {
         JPanelMenu.setForeground(new java.awt.Color(255, 51, 51));
         JPanelMenu.setLayout(null);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("INSERTAR");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        Insertar.setText("INSERTAR");
+        Insertar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                InsertarMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Insertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                InsertarActionPerformed(evt);
             }
         });
-        JPanelMenu.add(jButton1);
-        jButton1.setBounds(10, 110, 240, 80);
+        JPanelMenu.add(Insertar);
+        Insertar.setBounds(10, 110, 240, 80);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("ELIMINAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Eliminar.setText("ELIMINAR");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                EliminarActionPerformed(evt);
             }
         });
-        JPanelMenu.add(jButton2);
-        jButton2.setBounds(10, 290, 240, 80);
+        JPanelMenu.add(Eliminar);
+        Eliminar.setBounds(10, 290, 240, 80);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("MODIFICAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Modificar.setText("MODIFICAR");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                ModificarActionPerformed(evt);
             }
         });
-        JPanelMenu.add(jButton3);
-        jButton3.setBounds(10, 198, 240, 80);
+        JPanelMenu.add(Modificar);
+        Modificar.setBounds(10, 198, 240, 80);
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 1, 24)); // NOI18N
         jLabel1.setText("    MENU");
         JPanelMenu.add(jLabel1);
         jLabel1.setBounds(70, 30, 120, 40);
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("SALIR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        Salir.setText("SALIR");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                SalirActionPerformed(evt);
             }
         });
-        JPanelMenu.add(jButton4);
-        jButton4.setBounds(10, 540, 240, 80);
+        JPanelMenu.add(Salir);
+        Salir.setBounds(10, 540, 240, 80);
 
         jPanelBase.add(JPanelMenu);
         JPanelMenu.setBounds(0, 0, 260, 660);
@@ -139,29 +142,27 @@ public final class Diseño extends javax.swing.JFrame {
         jPanelAparicion.add(jLabel2);
         jLabel2.setBounds(340, 20, 150, 50);
 
-        prim_nombre.addActionListener(new java.awt.event.ActionListener() {
+        Nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prim_nombreActionPerformed(evt);
+                NombreActionPerformed(evt);
             }
         });
-        jPanelAparicion.add(prim_nombre);
-        prim_nombre.setBounds(180, 110, 90, 28);
-        jPanelAparicion.add(primer_apellido);
-        primer_apellido.setBounds(310, 110, 90, 28);
-        jPanelAparicion.add(Num_matricula);
-        Num_matricula.setBounds(470, 180, 120, 28);
+        jPanelAparicion.add(Nombre);
+        Nombre.setBounds(180, 110, 90, 22);
+        jPanelAparicion.add(precio_compra);
+        precio_compra.setBounds(310, 110, 90, 22);
 
-        jLabel3.setText(" Primer_Nombre");
+        jLabel3.setText("Nombre");
         jPanelAparicion.add(jLabel3);
-        jLabel3.setBounds(180, 90, 100, 16);
+        jLabel3.setBounds(200, 90, 100, 16);
 
-        jLabel4.setText("Primer_Apellido");
+        jLabel4.setText("precio_compra");
         jPanelAparicion.add(jLabel4);
-        jLabel4.setBounds(310, 90, 100, 16);
+        jLabel4.setBounds(320, 90, 100, 16);
 
-        jLabel6.setText("N_matricula");
+        jLabel6.setText("Categoria");
         jPanelAparicion.add(jLabel6);
-        jLabel6.setBounds(480, 160, 67, 16);
+        jLabel6.setBounds(480, 160, 51, 16);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,12 +199,10 @@ public final class Diseño extends javax.swing.JFrame {
 
         jPanelAparicion.add(jScrollPane1);
         jScrollPane1.setBounds(30, 240, 720, 350);
-        jPanelAparicion.add(fecha_nacimiento);
-        fecha_nacimiento.setBounds(460, 110, 120, 28);
 
-        jLabel7.setText("Fecha Nacimiento");
+        jLabel7.setText("Provedor");
         jPanelAparicion.add(jLabel7);
-        jLabel7.setBounds(470, 90, 100, 16);
+        jLabel7.setBounds(470, 90, 48, 16);
 
         seg_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,17 +210,28 @@ public final class Diseño extends javax.swing.JFrame {
             }
         });
         jPanelAparicion.add(seg_nombre);
-        seg_nombre.setBounds(180, 180, 90, 28);
+        seg_nombre.setBounds(180, 180, 90, 22);
 
-        jLabel5.setText("        Segundo_Nombre");
+        jLabel5.setText("        precio_venta");
         jPanelAparicion.add(jLabel5);
-        jLabel5.setBounds(140, 160, 150, 16);
-        jPanelAparicion.add(seg_apellido);
-        seg_apellido.setBounds(310, 180, 90, 28);
+        jLabel5.setBounds(170, 160, 100, 20);
+        jPanelAparicion.add(iva);
+        iva.setBounds(310, 180, 90, 22);
 
-        jLabel8.setText("Segundo_Apellido");
+        jLabel8.setText("iva");
         jPanelAparicion.add(jLabel8);
-        jLabel8.setBounds(310, 160, 100, 16);
+        jLabel8.setBounds(350, 160, 50, 16);
+
+        JCprovedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCprovedoresActionPerformed(evt);
+            }
+        });
+        jPanelAparicion.add(JCprovedores);
+        JCprovedores.setBounds(520, 110, 170, 22);
+
+        jPanelAparicion.add(JCcategorias);
+        JCcategorias.setBounds(520, 180, 180, 22);
 
         jPanelBase.add(jPanelAparicion);
         jPanelAparicion.setBounds(270, 0, 840, 660);
@@ -232,94 +242,93 @@ public final class Diseño extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void InsertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InsertarMouseClicked
           
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_InsertarMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
         JOptionPane.showMessageDialog(null, "GRACIAS POR USAR EL PROGRAMA MACPATO");
         System.exit(0);
                 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_SalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombre1= prim_nombre.getText();
-        String nombre2= seg_nombre.getText();
-        String apellido1= primer_apellido.getText();
-        String apellido2= seg_apellido.getText();
-        String fechaNacimiento= fecha_nacimiento.getText();
-        int idMatricula=Integer.parseInt(Num_matricula.getText());
-        if (CamposVacios()) {
-            JOptionPane.showMessageDialog(null, "Hay algun campo queno deberia estar vacio");
-        }
-        Estudiante e =new Estudiante(nombre1, nombre2, apellido1, apellido2, fechaNacimiento, idMatricula);
-         try {
-             if(c.InsertarEstudiante(e)){
-              limpiar();
-             ActualizarDatos();}
-         } catch (SQLException ex) {
-             Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
-         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
+//        String nombre1= Nombre.getText();
+//        String nombre2= seg_nombre.getText();
+//        String apellido1= precio_compra.getText();
+//        String apellido2= iva.getText();
+//        // Suponiendo que tienes un JComboBox llamado comboBox
+//        
+//        int idMatricula=Integer.parseInt(Num_matricula.getText());
+//        if (CamposVacios()) {
+//            JOptionPane.showMessageDialog(null, "Hay algun campo queno deberia estar vacio");
+//        }
+//        Estudiante e =new Estudiante(nombre1, nombre2, apellido1, apellido2, fechaNacimiento, idMatricula);
+//         try {
+//             if(c.InsertarEstudiante(e)){
+//              limpiar();
+//             ActualizarDatos();}
+//         } catch (SQLException ex) {
+//             Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
+//         }
+    }//GEN-LAST:event_InsertarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
       int a=jTable1.getSelectedRow();
          try {
-             c.eliminarEstudiante(lista_estudiantes.get(a));
+             pd.eliminarproducto(productos.get(a));
              ActualizarDatos();
          } catch (SQLException ex) {
              Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
          }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_EliminarActionPerformed
 
-    private void prim_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prim_nombreActionPerformed
+    private void NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_prim_nombreActionPerformed
+    }//GEN-LAST:event_NombreActionPerformed
 
     private void seg_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seg_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_seg_nombreActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-          if (fm==-1) {
-           return; 
-        }
-        Estudiante e = lista_estudiantes.get(fm);
-        
-        e.setNombre1(prim_nombre.getText());
-        e.setNombre2(seg_nombre.getText());
-        e.setApellido1(primer_apellido.getText());
-        e.setApellido2(seg_apellido.getText());
-        e.setFechaNacimiento(fecha_nacimiento.getText());
-        e.setIdMatricula(Integer.parseInt(Num_matricula.getText()));
-        if (CamposVacios()) {
-            JOptionPane.showMessageDialog(null, "Hay algun campo queno deberia estar vacio");
-        }
-        try {
-             if(c. modificarEstudiante(e)){
-              limpiar();
-             ActualizarDatos();
-             fm=-1;
-             }
-         } catch (SQLException ex) {
-             Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
-         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+//          if (fm==-1) {
+//           return; 
+//        }
+//        
+//        pd.eliminarproducto(productos.get());
+//        if (CamposVacios()) {
+//            JOptionPane.showMessageDialog(null, "Hay algun campo queno deberia estar vacio");
+//        }
+//        try {
+//             if(c. modificarEstudiante(e)){
+//              limpiar();
+//             ActualizarDatos();
+//             fm=-1;
+//             }
+//         } catch (SQLException ex) {
+//             Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
+//         }
+    }//GEN-LAST:event_ModificarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
       
-        fm= jTable1.getSelectedRow();
-        
-        Estudiante e = lista_estudiantes.get(fm);
-        if(e != null){
-         prim_nombre.setText(e.getNombre1());
-         seg_nombre.setText(e.getNombre2());
-        primer_apellido.setText(e.getApellido1());
-         seg_apellido.setText(e.getApellido2());
-         fecha_nacimiento.setText(e.getFechaNacimiento());
-        Num_matricula.setText(String.valueOf(e.getIdMatricula()));
-        }
+//        fm= jTable1.getSelectedRow();
+//        
+//        Estudiante e = lista_estudiantes.get(fm);
+//        if(e != null){
+//         Nombre.setText(e.getNombre1());
+//         seg_nombre.setText(e.getNombre2());
+//        precio_compra.setText(e.getApellido1());
+//         iva.setText(e.getApellido2());
+//         fecha_nacimiento.setText(e.getFechaNacimiento());
+//        Num_matricula.setText(String.valueOf(e.getIdMatricula()));
+//        }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void JCprovedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCprovedoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCprovedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,27 +372,37 @@ public final class Diseño extends javax.swing.JFrame {
             }
         });
     } 
+    public String combobox(JComboBox combobox){
+    Object selectedItem = combobox.getSelectedItem();
+    if (selectedItem != null) {
+    String selectedValue = selectedItem.toString();
+    System.out.println("Valor seleccionado: " + selectedValue);
+    return selectedValue;
+    } else {
+    System.out.println("Ningún elemento seleccionado");}
+        return null;
+
+    }
     
     public void limpiar(){
-    prim_nombre.setText("");
+    Nombre.setText("");
     seg_nombre.setText("");
-    primer_apellido.setText("");
-    seg_apellido.setText("");
-    fecha_nacimiento.setText("");
-    Num_matricula.setText("");
-    
+    precio_compra.setText("");
+    iva.setText("");
     }
-    public boolean CamposVacios(){
-         return prim_nombre.getText().isEmpty()|| primer_apellido.getText().isEmpty()|| seg_apellido.getText().isEmpty()||fecha_nacimiento.getText().isEmpty()
-                 ||Num_matricula.getText().isEmpty();
-    }
-    
+//    public boolean CamposVacios(){
+//         return Nombre.getText().isEmpty()|| precio_compra.getText().isEmpty()|| iva.getText().isEmpty()||fecha_nacimiento.getText().isEmpty()
+//                 ||Num_matricula.getText().isEmpty();
+//    }
+//    
      public void MandardDatosTabla(ArrayList<String[]>filas) {
     DefaultTableModel model = new DefaultTableModel();
     model.addColumn("Nombre");
-    model.addColumn("Apellido");
-    model.addColumn("Fecha de nacimiento");
-    model.addColumn("Fecha de matrícula");
+    model.addColumn("Precio compra");
+    model.addColumn("Precio Venta");
+    model.addColumn("iva");
+    model.addColumn("Proveedor");
+    model.addColumn("Categoria");
     jTable1.setModel(model);
          for (String[] fila : filas) {
              model.addRow(fila);
@@ -391,20 +410,22 @@ public final class Diseño extends javax.swing.JFrame {
 
 }
      public void ActualizarDatos() throws SQLException{
-    lista_estudiantes = c.obtenerEstudiantes();
-    MandardDatosTabla(c.obtenerDatosTabla(lista_estudiantes, lista_matricula));
+    productos = pd.obtenerProductos();
+    MandardDatosTabla(pd.obtenerDatosTabla());
 
 }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Eliminar;
+    private javax.swing.JButton Insertar;
+    public static javax.swing.JComboBox<String> JCcategorias;
+    public static javax.swing.JComboBox<String> JCprovedores;
     private javax.swing.JPanel JPanelMenu;
-    private javax.swing.JTextField Num_matricula;
-    private javax.swing.JTextField fecha_nacimiento;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton Modificar;
+    private javax.swing.JTextField Nombre;
+    private javax.swing.JButton Salir;
+    private javax.swing.JTextField iva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -417,9 +438,7 @@ public final class Diseño extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelBase;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
-    private javax.swing.JTextField prim_nombre;
-    private javax.swing.JTextField primer_apellido;
-    private javax.swing.JTextField seg_apellido;
+    private javax.swing.JTextField precio_compra;
     private javax.swing.JTextField seg_nombre;
     // End of variables declaration//GEN-END:variables
 }
