@@ -69,7 +69,7 @@ public final class Diseño extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        seg_nombre = new javax.swing.JTextField();
+        precio_venta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         iva = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -205,13 +205,13 @@ public final class Diseño extends javax.swing.JFrame {
         jPanelAparicion.add(jLabel7);
         jLabel7.setBounds(470, 90, 48, 16);
 
-        seg_nombre.addActionListener(new java.awt.event.ActionListener() {
+        precio_venta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                seg_nombreActionPerformed(evt);
+                precio_ventaActionPerformed(evt);
             }
         });
-        jPanelAparicion.add(seg_nombre);
-        seg_nombre.setBounds(180, 180, 90, 22);
+        jPanelAparicion.add(precio_venta);
+        precio_venta.setBounds(180, 180, 90, 22);
 
         jLabel5.setText("        precio_venta");
         jPanelAparicion.add(jLabel5);
@@ -254,12 +254,15 @@ public final class Diseño extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirActionPerformed
 
     private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
-//        String nombre1= Nombre.getText();
-//        String nombre2= seg_nombre.getText();
-//        String apellido1= precio_compra.getText();
-//        String apellido2= iva.getText();
-//        // Suponiendo que tienes un JComboBox llamado comboBox
-//        
+        String nombre = Nombre.getText();
+        int precioCompra = Integer.parseInt(precio_compra.getText());
+        int precioVenta = Integer.parseInt(precio_venta.getText());
+        int IVA = Integer.parseInt(iva.getText());
+        String rutProveedor = JCprovedores.getSelectedItem().toString();
+        int idCategoria = JCcategorias.getSelectedIndex() + 1;
+    
+    // Crear un objeto Producto con los valores obtenidos
+        Producto producto = new Producto(0, nombre, precioCompra, precioVenta, IVA, rutProveedor, idCategoria);
 //        int idMatricula=Integer.parseInt(Num_matricula.getText());
 //        if (CamposVacios()) {
 //            JOptionPane.showMessageDialog(null, "Hay algun campo queno deberia estar vacio");
@@ -288,9 +291,9 @@ public final class Diseño extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_NombreActionPerformed
 
-    private void seg_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seg_nombreActionPerformed
+    private void precio_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precio_ventaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_seg_nombreActionPerformed
+    }//GEN-LAST:event_precio_ventaActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
 //          if (fm==-1) {
@@ -387,7 +390,7 @@ public final class Diseño extends javax.swing.JFrame {
     
     public void limpiar(){
     Nombre.setText("");
-    seg_nombre.setText("");
+    precio_venta.setText("");
     precio_compra.setText("");
     iva.setText("");
     }
@@ -440,6 +443,6 @@ public final class Diseño extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
     private javax.swing.JTextField precio_compra;
-    private javax.swing.JTextField seg_nombre;
+    private javax.swing.JTextField precio_venta;
     // End of variables declaration//GEN-END:variables
 }
