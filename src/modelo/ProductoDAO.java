@@ -89,27 +89,29 @@ public class ProductoDAO {
     
     
     public ArrayList<String[]> obtenerDatosTabla(){
-        String[] datos= new String[6];
+        String[] datos= new String[7];
         ArrayList<String[]> filasColumna = new ArrayList<>();
         try {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT p.NOMBRE, p.PRECIO_COMPRA, p.PRECIO_VENTA, p.IVA, pr.NOMBRE, c.DENOMINACION FROM producto as p INNER JOIN proveedor as pr ON pr.RUT_PROVEEDOR = p.RUT_PROVEEDOR INNER JOIN categoria as c ON c.ID_CATEGORIA=p.ID_CATEGORIA ORDER BY p.ID_PRODUCTO;");
+        ResultSet rs = stmt.executeQuery("SELECT p.NOMBRE, p.PRECIO_COMPRA, p.PRECIO_VENTA, p.IVA, pr.NOMBRE, pr.RUT_PROVEEDOR, c.DENOMINACION FROM producto as p INNER JOIN proveedor as pr ON pr.RUT_PROVEEDOR = p.RUT_PROVEEDOR INNER JOIN categoria as c ON c.ID_CATEGORIA=p.ID_CATEGORIA ORDER BY p.ID_PRODUCTO;");
         while (rs.next()) {
             String nombre = rs.getString(1);
             int pc = rs.getInt(2);
             int pv = rs.getInt(3);
             int iva = rs.getInt(4);
             String prov = rs.getString(5);
-            String categ = rs.getString(6);
+            String rut = rs.getString(6);
+            String categ = rs.getString(7);
             
-            System.out.println(nombre+", "+pc+", "+pv+", "+iva+", "+prov+", "+categ);
+            System.out.println(nombre+", "+pc+", "+pv+", "+iva+", "+prov+", "+rut+", "+categ);
             
             datos[0] = nombre;
             datos[1] = String.valueOf(pc);
             datos[2] = String.valueOf(pv);
             datos[3] = String.valueOf(iva);
             datos[4] = prov;
-            datos[5] = categ;
+            datos[5] = rut;
+            datos[6] = categ;
              
             filasColumna.add(datos.clone());
         }
