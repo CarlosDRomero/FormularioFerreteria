@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
 /**
  *
  * @author LUIS
@@ -390,11 +391,36 @@ public final class Diseño extends javax.swing.JFrame {
     precio_compra.setText("");
     iva.setText("");
     }
-//    public boolean CamposVacios(){
-//         return Nombre.getText().isEmpty()|| precio_compra.getText().isEmpty()|| iva.getText().isEmpty()||fecha_nacimiento.getText().isEmpty()
-//                 ||Num_matricula.getText().isEmpty();
-//    }
-//    
+//  import javax.swing.JTextField;
+
+
+    public static boolean validarCampos(JTextField nombreField, JTextField precioCompraField,
+                                        JTextField precioVentaField, JTextField ivaField) {
+        // Validar campos vacíos
+        if (nombreField.getText().isEmpty() || precioCompraField.getText().isEmpty()
+                || precioVentaField.getText().isEmpty() || ivaField.getText().isEmpty()) {
+            return false;  // Hay campos vacíos
+        }
+
+        // Validar datos ingresados
+        try {
+            double precioCompra = Double.parseDouble(precioCompraField.getText());
+            double precioVenta = Double.parseDouble(precioVentaField.getText());
+            double iva = Double.parseDouble(ivaField.getText());
+
+            // Aquí puedes agregar más validaciones específicas según tus requisitos
+            
+            if (precioCompra <= 0 || precioVenta <= 0 || iva < 0 || precioCompra >= precioVenta) {
+                return false;  // Los datos ingresados no son válidos
+            }
+        } catch (NumberFormatException e) {
+            return false;  // Error al convertir los datos a números
+        }
+
+        return true;  // Los campos y datos son válidos
+    }
+
+
      public void MandardDatosTabla(ArrayList<String[]>filas) {
     DefaultTableModel model = new DefaultTableModel();
     model.addColumn("Nombre");
