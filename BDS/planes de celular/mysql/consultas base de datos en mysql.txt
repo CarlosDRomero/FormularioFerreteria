@@ -1,3 +1,4 @@
+para obtener el cliente, tipo_plan, marca celular, tienda compra, precio
 SELECT CONCAT(
     COALESCE(c.prim_nombre, ''),
     ' ',
@@ -13,3 +14,28 @@ JOIN celular ce ON co.id_celular = ce.id_celular
 JOIN tienda t ON co.id_tienda = t.id_tienda
 JOIN especificaciones e ON ce.id_especificacion = e.id_especificacion
 WHERE t.id_tienda = 3;
+
+--Para obtener la cantidad de clientes que han escogido un plan pospago,
+SELECT COUNT(*) AS total_compras
+FROM compra c
+JOIN sim s ON c.id_sim = s.id_sim
+JOIN plan p ON s.id_plan = p.id_plan
+JOIN detalles_plan dp ON p.id_detalle = dp.id_detalle
+JOIN Tipo_sim ts ON s.id_tiposim = ts.id_tiposim
+WHERE ts.tipo = 'pospago'
+AND dp.duracion = 'mensual';
+
+
+SELECT CONCAT(c.prim_nombre, ' ', c.prim_apellido) AS nombre_cliente, 
+       pl.servicio AS tipo_plan, 
+       e.marca AS marca_celular, 
+       t.direccion AS tienda_compra,
+       ce.precio AS precio
+FROM compra co
+JOIN cliente c ON co.id_cliente = c.id_cliente
+JOIN sim s ON co.id_sim = s.id_sim
+JOIN plan pl ON s.id_plan = pl.id_plan
+JOIN celular ce ON co.id_celular = ce.id_celular
+JOIN especificaciones e ON ce.id_especificacion = e.id_especificacion
+JOIN tienda t ON co.id_tienda = t.id_tienda
+ORDER BY co.id_cliente;
