@@ -5,15 +5,12 @@ package Interfaz;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import javax.swing.table.TableModel;
 /**
  *
  * @author LUIS
@@ -73,19 +70,23 @@ public final class Diseño extends javax.swing.JFrame {
         jPanelAparicion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         Nombre = new javax.swing.JTextField();
-        precio_compra = new javax.swing.JTextField();
+        PrecioCompra = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        precio_venta = new javax.swing.JTextField();
+        PrecioVenta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        iva = new javax.swing.JTextField();
+        IVA = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         JCprovedores = new javax.swing.JComboBox<>();
         JCcategorias = new javax.swing.JComboBox<>();
+        Id = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        Cantidad = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -93,7 +94,7 @@ public final class Diseño extends javax.swing.JFrame {
         jPanelBase.setBackground(new java.awt.Color(255, 255, 255));
         jPanelBase.setLayout(null);
 
-        JPanelMenu.setBackground(new java.awt.Color(0, 102, 204));
+        JPanelMenu.setBackground(new java.awt.Color(204, 204, 255));
         JPanelMenu.setForeground(new java.awt.Color(255, 51, 51));
         JPanelMenu.setLayout(null);
 
@@ -146,7 +147,7 @@ public final class Diseño extends javax.swing.JFrame {
         jPanelBase.add(JPanelMenu);
         JPanelMenu.setBounds(0, 0, 260, 660);
 
-        jPanelAparicion.setBackground(new java.awt.Color(0, 102, 204));
+        jPanelAparicion.setBackground(new java.awt.Color(218, 220, 255));
         jPanelAparicion.setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
@@ -160,21 +161,24 @@ public final class Diseño extends javax.swing.JFrame {
             }
         });
         jPanelAparicion.add(Nombre);
-        Nombre.setBounds(180, 110, 90, 22);
-        jPanelAparicion.add(precio_compra);
-        precio_compra.setBounds(310, 110, 90, 22);
+        Nombre.setBounds(190, 110, 90, 20);
+        jPanelAparicion.add(PrecioCompra);
+        PrecioCompra.setBounds(70, 180, 90, 22);
 
-        jLabel3.setText("Nombre");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setText("ID");
         jPanelAparicion.add(jLabel3);
-        jLabel3.setBounds(200, 90, 100, 16);
+        jLabel3.setBounds(70, 90, 50, 16);
 
-        jLabel4.setText("precio_compra");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setText("Precio compra");
         jPanelAparicion.add(jLabel4);
-        jLabel4.setBounds(320, 90, 100, 16);
+        jLabel4.setBounds(70, 160, 100, 16);
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Categoria");
         jPanelAparicion.add(jLabel6);
-        jLabel6.setBounds(480, 160, 51, 16);
+        jLabel6.setBounds(480, 160, 80, 16);
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -212,27 +216,30 @@ public final class Diseño extends javax.swing.JFrame {
         jPanelAparicion.add(jScrollPane1);
         jScrollPane1.setBounds(30, 240, 720, 350);
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Provedor");
         jPanelAparicion.add(jLabel7);
-        jLabel7.setBounds(470, 90, 48, 16);
+        jLabel7.setBounds(470, 90, 70, 16);
 
-        precio_venta.addActionListener(new java.awt.event.ActionListener() {
+        PrecioVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                precio_ventaActionPerformed(evt);
+                PrecioVentaActionPerformed(evt);
             }
         });
-        jPanelAparicion.add(precio_venta);
-        precio_venta.setBounds(180, 180, 90, 22);
+        jPanelAparicion.add(PrecioVenta);
+        PrecioVenta.setBounds(190, 180, 90, 22);
 
-        jLabel5.setText("        precio_venta");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("Precio venta");
         jPanelAparicion.add(jLabel5);
-        jLabel5.setBounds(170, 160, 100, 20);
-        jPanelAparicion.add(iva);
-        iva.setBounds(310, 180, 90, 22);
+        jLabel5.setBounds(190, 160, 100, 20);
+        jPanelAparicion.add(IVA);
+        IVA.setBounds(310, 180, 90, 22);
 
-        jLabel8.setText("iva");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("IVA");
         jPanelAparicion.add(jLabel8);
-        jLabel8.setBounds(350, 160, 50, 16);
+        jLabel8.setBounds(320, 160, 50, 16);
 
         JCprovedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,6 +251,32 @@ public final class Diseño extends javax.swing.JFrame {
 
         jPanelAparicion.add(JCcategorias);
         JCcategorias.setBounds(520, 180, 180, 22);
+
+        Id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IdActionPerformed(evt);
+            }
+        });
+        jPanelAparicion.add(Id);
+        Id.setBounds(70, 110, 90, 22);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setText("Cantidad");
+        jPanelAparicion.add(jLabel9);
+        jLabel9.setBounds(300, 90, 100, 16);
+
+        Cantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CantidadActionPerformed(evt);
+            }
+        });
+        jPanelAparicion.add(Cantidad);
+        Cantidad.setBounds(310, 110, 90, 22);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setText("Nombre");
+        jPanelAparicion.add(jLabel10);
+        jLabel10.setBounds(190, 90, 100, 16);
 
         jPanelBase.add(jPanelAparicion);
         jPanelAparicion.setBounds(270, 0, 840, 660);
@@ -270,14 +303,16 @@ public final class Diseño extends javax.swing.JFrame {
             mostrarErrores();
             return;
         }
+        String id = Id.getText();
         String nombre = Nombre.getText();
-        int precioCompra = Integer.parseInt(precio_compra.getText());
-        int precioVenta = Integer.parseInt(precio_venta.getText());
-        int IVA = Integer.parseInt(iva.getText());
+        int precioCompra = Integer.parseInt(PrecioCompra.getText());
+        int precioVenta = Integer.parseInt(PrecioVenta.getText());
+        int iva = Integer.parseInt(IVA.getText());
+        int cantidad = Integer.parseInt(Cantidad.getText());
         Proveedor pr = proveedores.get(JCprovedores.getSelectedIndex());
         String rutProveedor = pr.getRut();
         int idCategoria = JCcategorias.getSelectedIndex() + 1;
-        Producto producto = new Producto(0, nombre, precioCompra, precioVenta, IVA, rutProveedor, idCategoria);
+        Producto producto = new Producto(id, nombre, precioCompra, precioVenta, iva, cantidad, rutProveedor, idCategoria);
          try {
              if(pd.InsertarProducto(producto)){
               limpiar();
@@ -291,7 +326,7 @@ public final class Diseño extends javax.swing.JFrame {
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
       int a=Tabla.getSelectedRow();
       if(a==-1){
-          errores.add("seleccione una fila");
+          errores.add("Seleccione una fila para eliminar");
       mostrarErrores();
       return;
       }
@@ -307,15 +342,12 @@ public final class Diseño extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_NombreActionPerformed
 
-    private void precio_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precio_ventaActionPerformed
+    private void PrecioVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrecioVentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_precio_ventaActionPerformed
+    }//GEN-LAST:event_PrecioVentaActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
 
-      if (fm==-1) {
-           return; 
-        }
       if(!validarCampos()){
           mostrarErrores();
           return;
@@ -324,9 +356,9 @@ public final class Diseño extends javax.swing.JFrame {
       
        Producto p = productos.get(fm);
        p.setNombre(Nombre.getText());
-       p.setPrecio_compra(Integer.parseInt(precio_compra.getText()));
-       p.setPrecio_venta(Integer.parseInt(precio_venta.getText()));
-       p.setIVA(Integer.parseInt(iva.getText()));
+       p.setPrecio_compra(Integer.parseInt(PrecioCompra.getText()));
+       p.setPrecio_venta(Integer.parseInt(PrecioVenta.getText()));
+       p.setIVA(Integer.parseInt(IVA.getText()));
        Proveedor pr = proveedores.get(JCprovedores.getSelectedIndex()) ;
        p.setRutProveedor(pr.getRut());
        p.setId_categoria(JCcategorias.getSelectedIndex()+1);
@@ -347,10 +379,12 @@ public final class Diseño extends javax.swing.JFrame {
         fm= Tabla.getSelectedRow();
         
     Producto p = productos.get(fm);
+    Id.setText(p.getId());
     Nombre.setText(p.getNombre());
-    precio_compra.setText(String.valueOf(p.getPrecio_compra()));
-    precio_venta.setText(String.valueOf(p.getPrecio_venta()));
-    iva.setText(String.valueOf(p.getIVA())); 
+    PrecioCompra.setText(String.valueOf(p.getPrecio_compra()));
+    PrecioVenta.setText(String.valueOf(p.getPrecio_venta()));
+    IVA.setText(String.valueOf(p.getIVA()));
+    Cantidad.setText(String.valueOf(p.getCantidad()));
     int indice_prov= proveedores.stream() .map(Proveedor::getRut) .collect(java.util.stream.Collectors.toList()) .indexOf(p.getRutProveedor());;
     JCcategorias.setSelectedIndex(p.getId_categoria()-1);
     JCprovedores.setSelectedIndex(indice_prov);
@@ -360,6 +394,14 @@ public final class Diseño extends javax.swing.JFrame {
     private void JCprovedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCprovedoresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JCprovedoresActionPerformed
+
+    private void IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdActionPerformed
+
+    private void CantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CantidadActionPerformed
 
     public String combobox(JComboBox combobox){
     Object selectedItem = combobox.getSelectedItem();
@@ -374,51 +416,82 @@ public final class Diseño extends javax.swing.JFrame {
     }
     
     public void limpiar(){
+    Id.setText("");
     Nombre.setText("");
-    precio_venta.setText("");
-    precio_compra.setText("");
-    iva.setText("");
+    PrecioVenta.setText("");
+    PrecioCompra.setText("");
+    IVA.setText("");
+    Cantidad.setText("");
     }
 //  import javax.swing.JTextField;
 
 
     public boolean validarCampos() {
-        if (Nombre.getText().isEmpty() || precio_compra.getText().isEmpty()
-                || precio_venta.getText().isEmpty() || iva.getText().isEmpty()) {
-            
-            errores.add("- Hay campos vacios");
-            
-        }
-        if (!Nombre.getText().matches("^[a-zA-Z\\s][a-zA-Z0-9\\s]*$")){
-            errores.add("- Ingrese un nombre valido (no puede empezar por numeros ni contener caracteres especiales)");
-        }
-        try {
-            double precioCompra = Double.parseDouble(precio_compra.getText());
-            double precioVenta = Double.parseDouble(precio_venta.getText());
-            double IVA = Double.parseDouble(iva.getText());
-            
-            if (precioCompra <= 0 || precioVenta <= 0 || IVA < 0) {
-                errores.add("- No coloque numeros negativos");
-                
-            }
-            if (precioCompra >= precioVenta){
-                errores.add("- El precio de venta debe ser mayor que el precio de compra");
-            }
-        } catch (NumberFormatException e) {
-            
-            errores.add("- Inserte valores numericos validos");
-        }
+    validarCampoNoVacio(Nombre, "- El campo 'Nombre' no puede estar vacío");
+    validarCampoTextoValido(Nombre, "- Ingrese un nombre válido (no puede empezar por números ni contener caracteres especiales)");
+    validarCampoNumerico(IVA, "- Introduzca un valor numérico para el IVA");
+    validarCampoNumerico(PrecioCompra, "- Introduzca un valor numérico para el precio de compra");
+    validarCampoNumerico(PrecioVenta, "- Introduzca un valor numérico para el precio de venta");
+    validarCampoNumerico(Cantidad, "- Introduzca un valor numérico para la cantidad");
+    validarID(Id, "- La ID debe contener exactamente 12 dígitos numéricos");
+    int iva = obtenerEnteroDesdeCampo(IVA);
+    int precioCompra = obtenerEnteroDesdeCampo(PrecioCompra);
+    int precioVenta = obtenerEnteroDesdeCampo(PrecioVenta);
+    int cantidad = obtenerEnteroDesdeCampo(Cantidad);
 
-        return errores.isEmpty();
+    if (iva < 0 || precioCompra <= 0 || precioVenta <= 0 || cantidad<0) {
+        errores.add("- No coloque números negativos");
+    } else if (precioCompra >= precioVenta) {
+        errores.add("- El precio de venta debe ser mayor que el precio de compra");
     }
+
+    return errores.isEmpty();
+}
+
+    private void validarID(JTextField campo, String mensajeError) {
+        String valor = campo.getText();
+        if (!valor.matches("\\d{12}")) {
+            errores.add(mensajeError);
+        }
+    }    
+
+    private void validarCampoNoVacio(JTextField campo, String mensajeError) {
+        if (campo.getText().isEmpty()) {
+            errores.add(mensajeError);
+        }
+    }
+
+    private void validarCampoTextoValido(JTextField campo, String mensajeError) {
+        String valor = campo.getText();
+        if (!valor.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s][a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]*$")) {
+            errores.add(mensajeError);
+        }
+    }
+
+    private void validarCampoNumerico(JTextField campo, String mensajeError) {
+        String valor = campo.getText();
+        try {
+            Integer.parseInt(valor);
+        } catch (NumberFormatException e) {
+            errores.add(mensajeError);
+        }
+    }
+
+    private int obtenerEnteroDesdeCampo(JTextField campo) {
+        String valor = campo.getText();
+        return Integer.parseInt(valor);
+    }
+
 
 
      public void MandardDatosTabla(ArrayList<String[]>filas) {
     DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("ID");
     model.addColumn("Nombre");
     model.addColumn("Precio compra");
     model.addColumn("Precio Venta");
     model.addColumn("iva");
+    model.addColumn("Cantidad");
     model.addColumn("Proveedor");
     model.addColumn("rut");
     model.addColumn("Categoria");
@@ -436,17 +509,22 @@ public final class Diseño extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Cantidad;
     private javax.swing.JButton Eliminar;
+    private javax.swing.JTextField IVA;
+    private javax.swing.JTextField Id;
     private javax.swing.JButton Insertar;
     public static javax.swing.JComboBox<String> JCcategorias;
     public static javax.swing.JComboBox<String> JCprovedores;
     private javax.swing.JPanel JPanelMenu;
     private javax.swing.JButton Modificar;
     private javax.swing.JTextField Nombre;
+    private javax.swing.JTextField PrecioCompra;
+    private javax.swing.JTextField PrecioVenta;
     private javax.swing.JButton Salir;
     public static javax.swing.JTable Tabla;
-    private javax.swing.JTextField iva;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -454,10 +532,9 @@ public final class Diseño extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanelAparicion;
     private javax.swing.JPanel jPanelBase;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField precio_compra;
-    private javax.swing.JTextField precio_venta;
     // End of variables declaration//GEN-END:variables
 }

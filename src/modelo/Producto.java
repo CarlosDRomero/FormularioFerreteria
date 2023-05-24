@@ -1,28 +1,30 @@
 package modelo;
 
 public class Producto {
-    int id, id_categoria;
-    String nombre;
-    int precio_compra,precio_venta, IVA;
+    int id_categoria;
+    String id,nombre;
+    int precio_compra,precio_venta, IVA, cantidad;
+    
     String rutProveedor;
 
-    public Producto(int id, String nombre, int precio_compra, int precio_venta, int IVA, String rutProveedor, int id_categoria) {
+    public Producto(String id, String nombre, int precio_compra, int precio_venta, int IVA, int cantidad, String rutProveedor, int id_categoria) {
         this.id = id;
         this.id_categoria = id_categoria;
         this.nombre = nombre;
         this.precio_compra = precio_compra;
         this.precio_venta = precio_venta;
         this.IVA = IVA;
+        this.cantidad = cantidad;
         this.rutProveedor = rutProveedor;
     }
     
     
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -64,6 +66,14 @@ public class Producto {
 
     public void setIVA(int IVA) {
         this.IVA = IVA;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public String getRutProveedor() {
