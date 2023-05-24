@@ -1,0 +1,144 @@
+CREATE TABLE empresa (
+  id_empresa NUMBER PRIMARY KEY,
+  nombre VARCHAR2(250) NOT NULL
+);
+CREATE SEQUENCE secuencia_id_empresa
+  START WITH 1
+  INCREMENT BY 1
+;
+----------------------------------------------
+CREATE TABLE apps (
+  id_apps NUMBER PRIMARY KEY,
+  app_consumo VARCHAR2(250) Null,
+  nombre VARCHAR2(250) NULL
+);
+CREATE SEQUENCE secuencia_id_app
+  START WITH 1
+  INCREMENT BY 1
+;
+---------------------------------------------
+CREATE TABLE Tipo_sim (
+  id_tiposim NUMBER PRIMARY KEY,
+  tipo VARCHAR2(250) NOT NULL
+);
+CREATE SEQUENCE secuencia_id_tiposim
+  START WITH 1
+  INCREMENT BY 1
+;
+--------------------------------------------------
+CREATE TABLE tienda (
+  id_tienda NUMBER PRIMARY KEY,
+  direccion VARCHAR2(250) NOT NULL,
+ N_direccion VARCHAR2(250) NOT NULL
+);
+CREATE SEQUENCE secuencia_id_tienda
+  START WITH 1
+  INCREMENT BY 1
+;
+-------------------------------------------------
+CREATE TABLE cliente (
+  id_cliente NUMBER PRIMARY KEY,
+  cedula VARCHAR2(250) NOT NULL,
+  prim_nombre VARCHAR2(250) NOT NULL,
+  seg_nombre VARCHAR2(250),
+  prim_apellido VARCHAR2(250) NOT NULL,
+  seg_apellido VARCHAR2(250),
+  direccion VARCHAR2(200) NOT NULL,
+  N_direccion VARCHAR2(250) NOT NULL
+);
+CREATE SEQUENCE secuencia_id_cliente
+  START WITH 1
+  INCREMENT BY 1
+;
+-------------------------------------------------
+CREATE TABLE especificaciones (
+  id_especificacion NUMBER PRIMARY KEY,
+  marca VARCHAR2(250) NOT NULL,
+  almacenamiento VARCHAR2(250) NOT NULL,
+  ram VARCHAR2(250) NOT NULL,
+  camara VARCHAR2(250) NOT NULL,
+  velocidad VARCHAR2(250) NOT NULL
+);
+CREATE SEQUENCE secuencia_id_especificacion
+  START WITH 1
+  INCREMENT BY 1;
+------------------------------------------------
+CREATE TABLE detalles_plan (
+    id_detalle NUMBER PRIMARY KEY,
+    personas NUMBER NOT NULL,
+    duracion VARCHAR2(250) NOT NULL,
+    datos VARCHAR2(250) NULL,
+    minutos VARCHAR2(250)NULL,
+    precio VARCHAR2(250) not null
+
+);
+
+CREATE SEQUENCE secuencia_id_detalle
+    START WITH 1
+    INCREMENT BY 1;
+-----------------------------------------------
+CREATE TABLE detalle_apps (
+  id_apps NUMBER not null,
+  id_detalle NUMBER not null,
+ FOREIGN KEY (id_apps) REFERENCES apps(id_apps),
+ FOREIGN KEY (id_detalle) REFERENCES detalles_plan(id_detalle),
+ primary key (id_apps,Id_detalle)
+);
+----------------------------------------------
+
+CREATE TABLE plan 
+(
+ id_plan NUMBER PRIMARY KEY,
+ servicio VARCHAR2(250) NOT NULL,
+ id_detalle NUMBER NOT NULL,
+FOREIGN KEY (id_detalle) REFERENCES detalles_plan(id_detalle)
+);
+CREATE SEQUENCE secuencia_id_plan
+    START WITH 1
+    INCREMENT BY 1;
+--------------------------------------------------------------
+ CREATE TABLE celular (
+    id_celular NUMBER PRIMARY KEY,
+    precio NUMBER not null,
+    tipo_pago VARCHAR2(250) not null,
+    id_especificacion NUMBER,
+    FOREIGN KEY (id_especificacion) REFERENCES especificaciones(id_especificacion)
+);	
+ CREATE SEQUENCE secuencia_id_celular
+    START WITH 1
+    INCREMENT BY 1;
+-----------------------------------------------------------------------------
+CREATE TABLE sim (
+    id_sim NUMBER PRIMARY KEY,
+    numero number,
+    id_tiposim NUMBER,
+    id_plan NUMBER,
+    id_empresa NUMBER,
+    FOREIGN KEY (id_tiposim) REFERENCES tipo_sim(id_tiposim),
+    FOREIGN KEY (id_plan) REFERENCES plan(id_plan),
+    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
+);
+CREATE SEQUENCE secuencia_id_sim
+    START WITH 1
+    INCREMENT BY 1;
+------------------------------------------------------------------------------
+CREATE TABLE compra (
+    id_compra NUMBER PRIMARY KEY,
+    fecha_compra DATE,
+    id_celular NUMBER,
+    id_sim NUMBER,
+    id_cliente NUMBER,
+    id_tienda NUMBER,
+    FOREIGN KEY (id_celular) REFERENCES celular(id_celular),
+    FOREIGN KEY (id_sim) REFERENCES sim(id_sim),
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+    FOREIGN KEY (id_tienda) REFERENCES tienda(id_tienda)
+);
+CREATE SEQUENCE secuencia_id_compra
+    START WITH 1
+    INCREMENT BY 1;
+    
+    
+    
+    
+
