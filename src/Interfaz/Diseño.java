@@ -33,7 +33,7 @@ public final class Diseño extends javax.swing.JFrame {
             s_errores+=error+"\n";
         }
         
-        JOptionPane.showMessageDialog(null, s_errores);
+        JOptionPane.showMessageDialog(null, s_errores,"",2);
         errores.clear();
     }
     
@@ -44,7 +44,7 @@ public final class Diseño extends javax.swing.JFrame {
         prd= new ProveedorDAO();
        proveedores = prd.cargarProveedores();
        categorias = cd.cargarCategorias();
-       
+       errores = new ArrayList<>();
        for(Proveedor p: proveedores){
             JCprovedores.addItem(p.getNombre());
         }
