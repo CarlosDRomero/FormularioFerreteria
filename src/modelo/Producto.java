@@ -5,10 +5,18 @@ public class Producto {
     String nombre;
     int precio_compra,precio_venta, IVA;
     String rutProveedor;
-    
-    public Producto(){
-        
+
+    public Producto(int id, String nombre, int precio_compra, int precio_venta, int IVA, String rutProveedor, int id_categoria) {
+        this.id = id;
+        this.id_categoria = id_categoria;
+        this.nombre = nombre;
+        this.precio_compra = precio_compra;
+        this.precio_venta = precio_venta;
+        this.IVA = IVA;
+        this.rutProveedor = rutProveedor;
     }
+    
+    
 
     public int getId() {
         return id;
