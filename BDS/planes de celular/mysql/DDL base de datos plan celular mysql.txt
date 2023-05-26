@@ -83,7 +83,7 @@ CREATE TABLE celular (
 
 CREATE TABLE sim (
   id_sim INT PRIMARY KEY AUTO_INCREMENT,
-  numero INT,
+  numero VARCHAR(250),
   id_tiposim INT,
   id_plan INT,
   id_empresa INT,

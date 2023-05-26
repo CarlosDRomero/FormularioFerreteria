@@ -1,7 +1,7 @@
 
 
-
---para obtener que cliente compro en la tienda 3
+--1)
+--para obtener que clientes compraron en la tienda 3
 SELECT c.prim_nombre || ' ' || c.seg_nombre || ' ' || c.prim_apellido || ' ' || c.seg_apellido AS nombre_cliente, e.marca
 FROM cliente c
 JOIN compra co ON c.id_cliente = co.id_cliente
@@ -10,6 +10,7 @@ JOIN tienda t ON co.id_tienda = t.id_tienda
 JOIN especificaciones e ON ce.id_especificacion = e.id_especificacion
 WHERE t.id_tienda = 3;
 
+--2)
 --Para obtener la cantidad de clientes que han escogido un plan pospago,
 SELECT COUNT(*) AS total_compras
 FROM compra c
@@ -20,8 +21,8 @@ JOIN Tipo_sim ts ON s.id_tiposim = ts.id_tiposim
 WHERE ts.tipo = 'pospago'
 AND dp.duracion = 'mensual';
 
-
-para obtener el cliente, tipo_plan, marca celular, tienda compra, precio
+--3)
+--para obtener el cliente, tipo_plan, marca celular, tienda compra, precio
 SELECT c.prim_nombre || ' ' || c.prim_apellido AS nombre_cliente, 
        pl.servicio AS tipo_plan, 
        e.marca AS marca_celular, 
@@ -35,81 +36,96 @@ JOIN celular ce ON co.id_celular = ce.id_celular
 JOIN especificaciones e ON ce.id_especificacion = e.id_especificacion
 JOIN tienda t ON co.id_tienda = t.id_tienda;
 
+--4)
+--para obtener quien compro en una fecha, su direccion y precio
+SELECT c.prim_nombre || ' ' || c.seg_nombre || ' ' || c.prim_apellido || ' ' || c.seg_apellido AS nombre_cliente, 
+       co.fecha_compra, 
+       t.direccion AS direccion_tienda, 
+       cel.precio AS precio_celular
+FROM compra co
+JOIN cliente c ON co.id_cliente = c.id_cliente
+JOIN tienda t ON co.id_tienda = t.id_tienda
+JOIN celular cel ON co.id_celular = cel.id_celular;
+
+--5)
+--Para obtener el nombre del cliente, el número de SIM y el nombre de la empresa, puedes utilizar la siguiente consulta:
+
+SELECT c.prim_nombre || ' ' || c.seg_nombre || ' ' || c.prim_apellido || ' ' || c.seg_apellido AS nombre_cliente,
+       s.numero AS numero_sim,
+       e.nombre AS nombre_empresa
+FROM compra co
+JOIN cliente c ON co.id_cliente = c.id_cliente
+JOIN sim s ON co.id_sim = s.id_sim
+JOIN empresa e ON s.id_empresa = e.id_empresa;
 
 
 
+--6)
+--consulta con  el nombre del cliente, el numero , el tipo de sim y el servicio
+--en la tercera necesito el nombre del cliente, el servicio , y las apps que tiene cada uno  
+SELECT c.prim_nombre AS nombre_cliente, s.numero, ts.tipo AS tipo_sim, p.servicio
+FROM compra co
+JOIN cliente c ON co.id_cliente = c.id_cliente
+JOIN sim s ON co.id_sim = s.id_sim
+JOIN tipo_sim ts ON s.id_tiposim = ts.id_tiposim
+JOIN plan p ON s.id_plan = p.id_plan;
+--7)
+--conulta para ver el marca de especificaciones, el tipo de pago en celular , fecha de compra y tipo de plan y precio de detalles de plan 
 
+SELECT e.marca, ce.tipo_pago, co.fecha_compra, ts.tipo AS tipo_sim, dp.precio AS precio_plan
+FROM compra co
+JOIN celular ce ON co.id_celular = ce.id_celular
+JOIN sim s ON co.id_sim = s.id_sim
+JOIN detalles_plan dp ON s.id_plan = dp.id_detalle
+JOIN especificaciones e ON ce.id_especificacion = e.id_especificacion
+JOIN tipo_sim ts ON s.id_tiposim = ts.id_tiposim;
 
+--8)
+SELECT e.marca, MAX(c.precio) as precio_maximo, c.tipo_pago, MAX(t.direccion) as direccion
+FROM celular c
+JOIN especificaciones e ON c.id_especificacion = e.id_especificacion
+JOIN compra co ON co.id_celular = c.id_celular
+JOIN tienda t ON t.id_tienda = co.id_tienda
+GROUP BY c.id_celular, e.marca, c.tipo_pago
+order by c.id_celular;
 
+--9)
+--consulta para ver cedula,nombre cliente , direccion, numero, precio plan
+SELECT c.cedula, c.prim_nombre, c.seg_nombre, c.prim_apellido, c.seg_apellido, c.direccion, c.N_direccion, dp.precio
+FROM cliente c
+JOIN compra co ON c.id_cliente = co.id_cliente
+JOIN sim s ON co.id_sim = s.id_sim
+JOIN plan p ON s.id_plan = p.id_plan
+JOIN detalles_plan dp ON p.id_detalle = dp.id_detalle;
 
+--10)
 
+--consulta para saber cuanto clientes hay,cuantas apps, cuantos planes hay disponible y empresas hay
+SELECT
+  (SELECT COUNT(*) FROM cliente) AS cantidad_clientes,
+  (SELECT COUNT(*) FROM apps) AS cantidad_apps,
+  (SELECT COUNT(*) FROM detalles_plan) AS cantidad_planes,
+  (SELECT COUNT(*) FROM celular) AS cantidad_celular
+FROM dual;
 
--- Eliminar tabla compra
-DROP TABLE compra;
+--11)
+--consulta para saber nombre del cliente, direccion, marca, precio, tipo_pago, tipo de sim, precio de detalles plan, empresa
 
--- Eliminar tabla sim
-DROP TABLE sim;
-
--- Eliminar tabla celular
-DROP TABLE celular;
-
--- Eliminar tabla plan
-DROP TABLE plan;
-
--- Eliminar tabla detalle_apps
-DROP TABLE detalle_apps;
-
--- Eliminar tabla detalles_plan
-DROP TABLE detalles_plan;
-
--- Eliminar tabla especificaciones
-DROP TABLE especificaciones;
-
--- Eliminar tabla cliente
-DROP TABLE cliente;
-
--- Eliminar tabla tienda
-DROP TABLE tienda;
-
--- Eliminar tabla Tipo_sim
-DROP TABLE Tipo_sim;
-
--- Eliminar tabla apps
-DROP TABLE apps;
-
--- Eliminar tabla empresa
-DROP TABLE empresa;
-
--- Eliminar secuencia secuencia_id_compra
-DROP SEQUENCE secuencia_id_compra;
-
--- Eliminar secuencia secuencia_id_sim
-DROP SEQUENCE secuencia_id_sim;
-
--- Eliminar secuencia secuencia_id_celular
-DROP SEQUENCE secuencia_id_celular;
-
--- Eliminar secuencia secuencia_id_plan
-DROP SEQUENCE secuencia_id_plan;
-
--- Eliminar secuencia secuencia_id_detalle
-DROP SEQUENCE secuencia_id_detalle;
-
--- Eliminar secuencia secuencia_id_especificacion
-DROP SEQUENCE secuencia_id_especificacion;
-
--- Eliminar secuencia secuencia_id_cliente
-DROP SEQUENCE secuencia_id_cliente;
-
--- Eliminar secuencia secuencia_id_tienda
-DROP SEQUENCE secuencia_id_tienda;
-
--- Eliminar secuencia secuencia_id_tiposim
-DROP SEQUENCE secuencia_id_tiposim;
-
--- Eliminar secuencia secuencia_id_app
-DROP SEQUENCE secuencia_id_app;
-
--- Eliminar secuencia secuencia_id_empresa
-DROP SEQUENCE secuencia_id_empresa;
+SELECT c.prim_nombre || ' ' || c.seg_nombre || ' ' || c.prim_apellido || ' ' || c.seg_apellido AS nombre_cliente, 
+       c.direccion || ' ' || c.N_direccion AS direccion_cliente, 
+       es.marca, 
+       cel.precio, 
+       cel.tipo_pago, 
+       ts.tipo AS tipo_sim, 
+       dp.precio AS precio_detalles_plan, 
+       emp.nombre AS empresa
+FROM compra co
+JOIN cliente c ON co.id_cliente = c.id_cliente
+JOIN celular cel ON co.id_celular = cel.id_celular
+JOIN especificaciones es ON cel.id_especificacion = es.id_especificacion
+JOIN sim s ON co.id_sim = s.id_sim
+JOIN tipo_sim ts ON s.id_tiposim = ts.id_tiposim
+JOIN plan p ON s.id_plan = p.id_plan
+JOIN detalles_plan dp ON p.id_detalle = dp.id_detalle
+JOIN empresa emp ON s.id_empresa = emp.id_empresa;
 

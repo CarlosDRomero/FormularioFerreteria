@@ -219,46 +219,46 @@ VALUES (800.000, 'Transferencia bancaria', 6);
 
 #id_sim
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa)#1
-VALUES (9876543210, 1, 1, 1);
+VALUES ('9876543210', 1, 1, 1);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #2
-VALUES (5551234567, 1, 2, 2);
+VALUES ('5551234567', 1, 2, 2);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa)#3
-VALUES (9998887777, 1, 3, 3);
+VALUES ('9998887777', 1, 3, 3);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #4
-VALUES (9998887777, 1, 4, 4);
+VALUES ('9998887777', 1, 4, 4);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #5
-VALUES (9998887777, 1, 5, 5);
+VALUES ('9998887777', 1, 5, 5);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #6
-VALUES (2468135790, 1, 6, 1);
+VALUES ('2468135790', 1, 6, 1);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #7
-VALUES (2456455790, 1, 7, 2);
+VALUES ('2456455790', 1, 7, 2);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #8
-VALUES (9542355790, 1, 8, 3);
+VALUES ('9542355790', 1, 8, 3);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #9
-VALUES (289965790, 1, 9, 1);
+VALUES ('289965790', 1, 9, 1);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #10
-VALUES (456735790, 2, 10, 1);
+VALUES ('456735790', 2, 10, 1);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #11
-VALUES (67657790, 2, 11, 2);
+VALUES ('67657790', 2, 11, 2);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #12
-VALUES (34557790, 2, 12, 3);
+VALUES ('34557790', 2, 12, 3);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #13
-VALUES (45667790, 2, 13, 4);
+VALUES ('45667790', 2, 13, 4);
 
 INSERT INTO sim (numero, id_tiposim, id_plan, id_empresa) #14
-VALUES (123267790, 2, 14, 5);
+VALUES ('123267790', 2, 14, 5);
 
 
 
