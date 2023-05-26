@@ -25,7 +25,6 @@ DROP SEQUENCE sqBarrio;
 DROP SEQUENCE sqDireccion;
 DROP SEQUENCE sqFerreteria;
 DROP SEQUENCE sqCategoria;
-DROP SEQUENCE sqProducto;
 DROP SEQUENCE sqSolicitud;
 DROP SEQUENCE sqFactura;
 
