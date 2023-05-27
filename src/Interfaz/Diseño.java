@@ -43,6 +43,8 @@ public final class Diseño extends javax.swing.JFrame {
        proveedores = prd.cargarProveedores();
        categorias = cd.cargarCategorias();
        errores = new ArrayList<>();
+       Modificar.setEnabled(false);
+       Eliminar.setEnabled(false);
        for(Proveedor p: proveedores){
             JCprovedores.addItem(p.getNombre());
         }
@@ -253,6 +255,11 @@ public final class Diseño extends javax.swing.JFrame {
         jPanelAparicion.add(JCcategorias);
         JCcategorias.setBounds(520, 180, 180, 22);
 
+        Id.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IdMouseClicked(evt);
+            }
+        });
         Id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IdActionPerformed(evt);
@@ -338,6 +345,7 @@ public final class Diseño extends javax.swing.JFrame {
             pd.eliminarProducto(productos.get(fm));
             ActualizarDatos();
             fm = -1;
+            limpiar();
         } catch (SQLException ex) {
             Logger.getLogger(Diseño.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -385,7 +393,8 @@ public final class Diseño extends javax.swing.JFrame {
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
-      
+        Id.setEnabled(false);
+        
         fm= Tabla.getSelectedRow();
         
     Producto p = productos.get(fm);
@@ -395,10 +404,11 @@ public final class Diseño extends javax.swing.JFrame {
     PrecioVenta.setText(String.valueOf(p.getPrecio_venta()));
     IVA.setText(String.valueOf(p.getIVA()));
     Cantidad.setText(String.valueOf(p.getCantidad()));
-    int indice_prov= proveedores.stream() .map(Proveedor::getRut) .collect(java.util.stream.Collectors.toList()) .indexOf(p.getRutProveedor());;
+    int indice_prov= proveedores.stream() .map(Proveedor::getRut) .collect(java.util.stream.Collectors.toList()) .indexOf(p.getRutProveedor());
     JCcategorias.setSelectedIndex(p.getId_categoria()-1);
     JCprovedores.setSelectedIndex(indice_prov);
-    
+    Eliminar.setEnabled(true);
+    Modificar.setEnabled(true);
     }//GEN-LAST:event_TablaMouseClicked
 
     private void JCprovedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCprovedoresActionPerformed
@@ -412,6 +422,15 @@ public final class Diseño extends javax.swing.JFrame {
     private void CantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CantidadActionPerformed
+
+    private void IdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IdMouseClicked
+        limpiar();
+        Id.setEnabled(true);
+        Id.requestFocus();
+        fm=-1;
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
+    }//GEN-LAST:event_IdMouseClicked
 
     public String combobox(JComboBox combobox){
     Object selectedItem = combobox.getSelectedItem();

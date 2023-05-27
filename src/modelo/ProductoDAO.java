@@ -46,7 +46,7 @@ public class ProductoDAO {
     public boolean InsertarProducto(Producto p) throws SQLException {
         
         PreparedStatement ps1 =   con.prepareStatement("INSERT INTO PRODUCTO (ID_PRODUCTO,NOMBRE, PRECIO_COMPRA, PRECIO_VENTA, IVA, RUT_PROVEEDOR, ID_CATEGORIA) VALUES (?,?,?,?,?,?,?)");
-        PreparedStatement ps2 =   con.prepareStatement("INSERT INTO INVENTARIO_FERRETERIA (ID_PRODUCTO, ID_FERRETERIA, CANTIDAD) VALUES (?,1,?)");
+        PreparedStatement ps2 =   con.prepareStatement("INSERT INTO INVENTARIO_FERRETERIA (ID_PRODUCTO, ID_FERRETERIA, CANTIDAD) VALUES (?,'852327111-1',?)");
         
         ps1.setString(1,p.getId());
         ps1.setString(2, p.getNombre());
@@ -69,8 +69,8 @@ public class ProductoDAO {
     }
     public boolean modificarProducto(Producto p) throws SQLException{
         PreparedStatement ps1 =   con.prepareStatement("UPDATE producto SET NOMBRE=?,PRECIO_COMPRA=?,PRECIO_VENTA=?,IVA=?, RUT_PROVEEDOR=?, ID_CATEGORIA=? WHERE ID_PRODUCTO=?");
-        PreparedStatement ps2 =   con.prepareStatement("UPDATE inventario_ferreteria SET CANTIDAD=? WHERE ID_PRODUCTO = ? AND ID_FERRETERIA = 1");
-        PreparedStatement ps3 =   con.prepareStatement("INSERT IGNORE INTO INVENTARIO_FERRETERIA (ID_PRODUCTO, ID_FERRETERIA, CANTIDAD) VALUES (?,1,?)");
+        PreparedStatement ps2 =   con.prepareStatement("UPDATE inventario_ferreteria SET CANTIDAD=? WHERE ID_PRODUCTO = ? AND ID_FERRETERIA = '852327111-1'");
+        PreparedStatement ps3 =   con.prepareStatement("INSERT IGNORE INTO INVENTARIO_FERRETERIA (ID_PRODUCTO, ID_FERRETERIA, CANTIDAD) VALUES (?,'852327111-1',?)");
         
         ps1.setString(1, p.getNombre());
         ps1.setInt(2, p.getPrecio_compra());
