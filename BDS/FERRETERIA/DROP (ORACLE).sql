@@ -23,12 +23,6 @@ DROP SEQUENCE sqCiudad;
 DROP SEQUENCE sqLocalidad;
 DROP SEQUENCE sqBarrio;
 DROP SEQUENCE sqDireccion;
-DROP SEQUENCE sqFerreteria;
 DROP SEQUENCE sqCategoria;
 DROP SEQUENCE sqSolicitud;
 DROP SEQUENCE sqFactura;
-
-DROP TRIGGER productos_solicitud_proveedor;
-DROP TRIGGER actualizar_inventario_i;
-DROP TRIGGER actualizar_inventario_u;
-DROP TRIGGER actualiza_inventario_factura;
