@@ -43,8 +43,13 @@ public final class Diseño extends javax.swing.JFrame {
        proveedores = prd.cargarProveedores();
        categorias = cd.cargarCategorias();
        errores = new ArrayList<>();
+<<<<<<< HEAD
        Modificar.setEnabled(false);
        Eliminar.setEnabled(false);
+=======
+       Eliminar.setEnabled(false);
+       Modificar.setEnabled(false);
+>>>>>>> 2852352a14075ed048b41aae8da1fef1c70d7868
        for(Proveedor p: proveedores){
             JCprovedores.addItem(p.getNombre());
         }
@@ -323,8 +328,8 @@ public final class Diseño extends javax.swing.JFrame {
         Producto producto = new Producto(id, nombre, precioCompra, precioVenta, iva, cantidad, rutProveedor, idCategoria);
          try {
              if(pd.InsertarProducto(producto)){
-              limpiar();
-             ActualizarDatos();
+               limpiar();
+               ActualizarDatos();
              }
          } catch (SQLIntegrityConstraintViolationException ex) {
              errores.add("Esta id ya esta registrada,\npuede utilizar el boton modificar si desea actualizar el registro." );
@@ -383,7 +388,6 @@ public final class Diseño extends javax.swing.JFrame {
        
         try {
             if(pd.modificarProducto(p)){
-                limpiar();
                 ActualizarDatos();
                 fm=-1;
             }
@@ -394,7 +398,10 @@ public final class Diseño extends javax.swing.JFrame {
 
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
         Id.setEnabled(false);
+<<<<<<< HEAD
         
+=======
+>>>>>>> 2852352a14075ed048b41aae8da1fef1c70d7868
         fm= Tabla.getSelectedRow();
         
     Producto p = productos.get(fm);
@@ -409,6 +416,10 @@ public final class Diseño extends javax.swing.JFrame {
     JCprovedores.setSelectedIndex(indice_prov);
     Eliminar.setEnabled(true);
     Modificar.setEnabled(true);
+<<<<<<< HEAD
+=======
+    Insertar.setEnabled(false);
+>>>>>>> 2852352a14075ed048b41aae8da1fef1c70d7868
     }//GEN-LAST:event_TablaMouseClicked
 
     private void JCprovedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCprovedoresActionPerformed
@@ -416,7 +427,8 @@ public final class Diseño extends javax.swing.JFrame {
     }//GEN-LAST:event_JCprovedoresActionPerformed
 
     private void IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdActionPerformed
-        // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_IdActionPerformed
 
     private void CantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CantidadActionPerformed
@@ -424,12 +436,21 @@ public final class Diseño extends javax.swing.JFrame {
     }//GEN-LAST:event_CantidadActionPerformed
 
     private void IdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IdMouseClicked
+<<<<<<< HEAD
+=======
+        Eliminar.setEnabled(false);
+        Modificar.setEnabled(false);
+        Insertar.setEnabled(true);
+>>>>>>> 2852352a14075ed048b41aae8da1fef1c70d7868
         limpiar();
         Id.setEnabled(true);
         Id.requestFocus();
         fm=-1;
+<<<<<<< HEAD
         Modificar.setEnabled(false);
         Eliminar.setEnabled(false);
+=======
+>>>>>>> 2852352a14075ed048b41aae8da1fef1c70d7868
     }//GEN-LAST:event_IdMouseClicked
 
     public String combobox(JComboBox combobox){
@@ -509,7 +530,7 @@ public final class Diseño extends javax.swing.JFrame {
 
     private void validarCampoTextoValido(JTextField campo, String mensajeError) {
         String valor = campo.getText();
-        if (!valor.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s][a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]*$")) {
+        if (!valor.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s][a-zA-Z0-9/ñÑáéíóúÁÉÍÓÚ\\s]*$")) {
             errores.add(mensajeError);
         }
     }
